@@ -1,0 +1,27 @@
+\BOOKMARK [0][-]{chapter*.2}{Povzetek}{}% 1
+\BOOKMARK [0][-]{chapter*.3}{Abstract}{}% 2
+\BOOKMARK [0][-]{chapter.1}{Uvod}{}% 3
+\BOOKMARK [1][-]{section.1.1}{Zgodovina}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Uporabjene metodologije}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.3}{Cilji in predvidevani rezultati diplomske naloge}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.4}{Pripravljeno okolje za testiranje}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.5}{Pojasnilo kode v zbirniku}{chapter.1}% 8
+\BOOKMARK [0][-]{chapter.2}{Splo\235en pregled optimiziranja}{}% 9
+\BOOKMARK [1][-]{section.2.1}{Optimizacija kode brez skokov}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.2}{Optimizacija kode s skoki}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Optimizacija klicev funkcij}{chapter.2}% 12
+\BOOKMARK [0][-]{chapter.3}{GNU-Superoptimizer sup1}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Opis programa in nacina delovanja}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.2}{Primeri optimizacije}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.3}{Prednosti in slabosti}{chapter.3}% 16
+\BOOKMARK [0][-]{chapter.4}{STOKE sup2}{}% 17
+\BOOKMARK [1][-]{section.4.1}{Opis programa in nacina delovanja}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.2}{Primeri optimizacije}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.3}{Prednosti in slabosti}{chapter.4}% 20
+\BOOKMARK [0][-]{chapter.5}{GNU Compiler Collection}{}% 21
+\BOOKMARK [1][-]{section.5.1}{Opis programa in nacina delovanja}{chapter.5}% 22
+\BOOKMARK [1][-]{section.5.2}{Primeri optimizacije}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.3}{Prednosti in slabosti}{chapter.5}% 24
+\BOOKMARK [0][-]{chapter.6}{Paralelizacija algoritma optimiziranja}{}% 25
+\BOOKMARK [0][-]{chapter.7}{Zakljucek}{}% 26
+\BOOKMARK [0][-]{chapter.7}{Literatura}{}% 27

@@ -1,0 +1,162 @@
+\begin{thebibliography}{10}
+
+\bibitem{cygwin}
+Cygwin.
+\newblock Dosegljivo: \url{https://www.cygwin.com/}.
+\newblock [Dostopano: \today].
+
+\bibitem{razlog}
+A generic superoptimizer.
+\newblock Dosegljivo:
+  \url{https://anthonythecoder.wordpress.com/2016/03/04/a-generic-superoptimizer/}.
+\newblock [Dostopano: \today].
+
+\bibitem{gcc2}
+Gnu compiler collection.
+\newblock Dosegljivo: \url{https://gcc.gnu.org/wiki/HomePage}.
+\newblock [Dostopano: \today].
+
+\bibitem{sup1}
+Gnu superoptimizer.
+\newblock Dosegljivo: \url{https://github.com/embecosm/gnu-superopt}.
+\newblock [Dostopano: \today].
+
+\bibitem{huff}
+Huffman coding.
+\newblock Dosegljivo:
+  \url{https://www.cs.cf.ac.uk/Dave/Multimedia/node210.html}.
+\newblock [Dostopano: \today].
+
+\bibitem{code1}
+Huffman github.
+\newblock Dosegljivo: \url{https://github.com/maxtors/Huffman}.
+\newblock [Dostopano: \today].
+
+\bibitem{asem}
+Introduction to x64 assembly.
+\newblock Dosegljivo:
+  \url{https://software.intel.com/sites/default/files/m/d/4/1/d/8/Introduction_to_x64_Assembly.pdf}.
+\newblock [Dostopano: \today].
+
+\bibitem{gcc}
+Options that control optimization.
+\newblock Dosegljivo: \url{https://github.com/embecosm/gnu-superopt}.
+\newblock [Dostopano: \today].
+
+\bibitem{sup2}
+Stoke.
+\newblock Dosegljivo: \url{https://github.com/StanfordPL/stoke}.
+\newblock [Dostopano: \today].
+
+\bibitem{box}
+Virtualbox.
+\newblock Dosegljivo: \url{https://www.virtualbox.org/wiki/VirtualBox}.
+\newblock [Dostopano: \today].
+
+\bibitem{super}
+Sorav Bansal and Alex Aiken.
+\newblock Automatic generation of peephole superoptimizers.
+\newblock {\em SIGOPS Oper. Syst. Rev.}, 40(5):394--403, October 2006.
+
+\bibitem{pdf5}
+Thomas Crick.
+\newblock Superoptimisation: provably optimal code generation using answer set
+  programming.
+\newblock August 2009.
+
+\bibitem{article3}
+Leonardo De~Moura and Nikolaj Bj{\o}rner.
+\newblock Z3: An efficient smt solver.
+\newblock In {\em Proceedings of the Theory and Practice of Software, 14th
+  International Conference on Tools and Algorithms for the Construction and
+  Analysis of Systems}, TACAS'08/ETAPS'08, pages 337--340, Berlin, Heidelberg,
+  2008. Springer-Verlag.
+
+\bibitem{pdf1}
+Aseem Garg.
+\newblock Superoptimization based llvm to x86 compiler.
+\newblock Technical report, Indian Institute of Technology Delhi, Delhi,
+  January 2006.
+
+\bibitem{url1}
+Torbj\"{o}rn Granlund and Richard Kenner.
+\newblock Eliminating branches using a superoptimizer and the gnu c compiler.
+\newblock {\em SIGPLAN Not.}, 27(7):341--352, July 1992.
+
+\bibitem{ann}
+W.~K. HASTINGS.
+\newblock Monte carlo sampling methods using markov chains and their
+  applications.
+\newblock {\em Biometrika}, 57(1):97--109, 1970.
+
+\bibitem{article4}
+Stefan Heule, Eric Schkufza, Rahul Sharma, and Alex Aiken.
+\newblock Stratified synthesis: Automatically learning the x86-64 instruction
+  set.
+\newblock {\em SIGPLAN Not.}, 51(6):237--250, June 2016.
+
+\bibitem{float}
+Steve Hollasch.
+\newblock Ieee standard 754 floating point numbers.
+\newblock Dosegljivo:
+  \url{http://steve.hollasch.net/cgindex/coding/ieeefloat.html}.
+\newblock [Dostopano: \today].
+
+\bibitem{pdf4}
+Tom Hume.
+\newblock Literature review: Superoptimizers.
+\newblock Dosegljivo:
+  \url{http://www.sis.uta.fi/~pt/TIEA5_Thesis_Course/Session_09_2013_02_15/Example\%20Literature\%20Reviews/Example\%20Literature\%20review\%20Chronological.pdf},
+  November 2011.
+\newblock [Dostopano: \today].
+
+\bibitem{branch}
+Andrew~J. Hutton, Linux Symposium, C.~Craig Ross, Linux Symposium, Ben~Elliston
+  Ibm, Janis~Johnson Ibm, Mark~Mitchell Codesourcery, Toshi Morita,
+  Diego~Novillo Google, Gerald~Pfeifer Novell, Ian~Lance Taylor, C.~Craig Ross,
+  Linux Symposium, and Roger~Anthony Sayle.
+\newblock A superoptimizer analysis of multiway branch code generation, 2008.
+
+\bibitem{pdf2}
+Henry Massalin.
+\newblock Superoptimizer: A look at the smallest program.
+\newblock {\em SIGPLAN Not.}, 22(10):122--126, October 1987.
+
+\bibitem{avoid}
+Frank Mueller and David~B. Whalley.
+\newblock Avoiding conditional branches bycode replication.
+\newblock In {\em In Proceedings of the ACM SIGPLAN'95 Conference onProgramming
+  Language Design and Implementation (PLDI}, pages 56--66, 1995.
+
+\bibitem{pdf6}
+Jesper S{\"a}rnesj{\"o}.
+\newblock Using binary decision diagrams to determine program equivalence in a
+  superoptimizer., 2011.
+
+\bibitem{article1}
+Eric Schkufza, Rahul Sharma, and Alex Aiken.
+\newblock Stochastic superoptimization.
+\newblock {\em SIGPLAN Not.}, 48(4):305--316, March 2013.
+
+\bibitem{float2}
+Eric Schkufza, Rahul Sharma, and Alex Aiken.
+\newblock Stochastic optimization of floating-point programs with tunable
+  precision.
+\newblock {\em SIGPLAN Not.}, 49(6):53--64, June 2014.
+
+\bibitem{article5}
+Eric Schkufza, Rahul Sharma, and Alex Aiken.
+\newblock Stochastic program optimization.
+\newblock {\em Commun. ACM}, 59(2):114--122, January 2016.
+
+\bibitem{article2}
+Rahul Sharma, Eric Schkufza, Berkeley Churchill, and Alex Aiken.
+\newblock Data-driven equivalence checking.
+\newblock {\em SIGPLAN Not.}, 48(10):391--406, October 2013.
+
+\bibitem{sto}
+Rahul Sharma, Eric Schkufza, Berkeley Churchill, and Alex Aiken.
+\newblock Conditionally correct superoptimization.
+\newblock {\em SIGPLAN Not.}, 50(10):147--162, October 2015.
+
+\end{thebibliography}
