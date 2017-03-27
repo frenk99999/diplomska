@@ -1,0 +1,475 @@
+\subsection{GNU Compiler Colection}
+GCC je napisal Richard Matthew Stallman leta 1987 kot prevajalnik za projekt GNU, tako da bi bil na voljo kot prosto programje. Njegov razvoj je veèinoma vodila Free Software Foundation. Skupina razvijalcev, ki je bila nezadovoljna s poèasnim napredovanjem in zaprto naravo uradnega razvoja GCC, je leta 1997 razvila projekt z imenom EGCS (Experimental/Enhanced GNU Compiler System). S projektom so povezali veè preizkusnih odcepljenih programov v posamezen projekt, izvirajoè iz GCC. Razvoj EGCS se je kasneje pokazal za precej bolj življenjskega od razvoja GCC, tako da so aprila 1999 konèno doloèili kot uradno razlièico GCC. Sedaj GCC vzdržuje veè skupin programerjev iz celega sveta. Prenesli so ga na veè razliènih vrst procesorjev in operacijskih sistemov kot kateri drugi prevajalnik. GCC velikokrat izberejo za razvoj programske opreme, ki se bo izvajala na razlièni strojni opremi. Razlike domaèih prevajalnikov vodijo do težav v razvijajoèi programski kodi, ki se naj bi pravilno prevedla na vseh prevajalnikih in v izdelanih skriptah, ki bodo tekle na vseh platformah. Z uporabo GCC je enak razèlenjevalni program za vse platforme, in èe se koda prevede na enem sistemu, je veèja verjetnost, da se bo prevedla tudi na drugem. V nekaterih primerih GCC naredi poèasnejše izvršne programe kot drugi prevajalniki, vendar se ga zaradi prostosti in možnih manjših razvojnih stroškov splaèa uporabiti.
+
+\chapter{GNU Compiler Collection}
+\label{ch3}
+GCC je napisal Richard Matthew Stallman leta 1987 kot prevajalnik za projekt GNU, tako da bi bil na voljo kot prosto programje. Njegov razvoj je veèinoma vodila Free Software Foundation. Skupina razvijalcev, ki je bila nezadovoljna s poèasnim napredovanjem in zaprto naravo uradnega razvoja GCC, je leta 1997 razvila projekt z imenom EGCS (Experimental/Enhanced GNU Compiler System). S projektom so povezali veè preskusnih odcepljenih programih v posamezen projekt, izvirajoè iz GCC. Razvoj EGCS se je kasneje pokazal za precej bolj življenjskega od razvoja GCC, tako da so aprila 1999 konèno doloèili kot uradno razlièico GCC. Sedaj GCC vzdržuje veè skupin programerjev iz celega sveta. Prenesli so ga na veè razliènih vrst procesorjev in operacijskih sistemov kot kateri drugi prevajalnik. GCC velikokrat izberejo za razvoj programske opreme, ki se bo izvajala na razlièni strojni opremi. Razlike domaèinskih prevajalnikov vodijo do težav v razvijajoèi programski kodi, ki se naj bi pravilno prevedla na vseh prevajalnikih in v izdelanih skriptah, ki bodo tekle na vseh platformah. Z uporabo GCC je enak razèlenjevalni program za vse platforme, in èe se koda prevede na enem sistemu, je veèja verjetnost, da se bo prevedla tudi na drugem. V nekaterih primerih GCC naredi poèasnejše izvršne programe kot drugi prevajalniki, vendar se ga zaradi prostosti in možnih manjših razvojnih stroškov splaèa uporabiti.
+\section{Opis programa in naèina delovanja}
+\label{loi}
+Kot že omenjeno v poglavju \ref{ch3} GCC je prevajalk, vzdrževan prek veè skupin programerjev. Prevajalnik je preprost za uporabo. Zaženemo ga lahko le z enim samim ukazom v ukazni vrstici. Prevajanik privzeto ne optimizira kode, vendar ima nastavitve, ki lahko omogoèijo doloèene optimizacije. Omogoèimo jih lahko tako, da dodamo zastavice in glede na zastavice, ki smo jih dali, potem program med prevajanjem optimizira. Ko konèanem prevajanju, program preprosto izpiše preveden program v datoteko, ki jo lahko poženemo kasneje. Ker je prevajalnik namenjen za širšo publiko, je tudi optimizator, pakiran z prevajalnikom, odprt širši publiki. 
+\subsection{Naèin optimiziranja}
+Kot je že omenjeno v poglavju \ref{loi}, GCC mora imeti podane zastavice, ki povedo katere optimizacije naj opravi za doloèen program. Èas prevajanja je odvisen od omogoèenih optimizacij. Poleg zamenjav funkcijonalnih enakih kod, optimizator omogoèa vstavljanje generirane kode funkcije namesto klica funkcije in eliminacijo if stavkov in zank, katerih pogoj ni nikoli izpolnjen (ali je vedno izpolnjen pri if stavku).   
+\section{Primeri optimizacije}
+\label{priG3}
+Tukaj je nekaj delov programa, ki jih je optimizator optimiziral in njihov pripadajoèi optimiziran program. Testiranje deluje v dveh delih. Prvi del je optimiziranje kratkih programov (enakih kot v \ref{priG}), drugi del pa vsebuje poskuse na veèjih programih. Taka delitev nam bo dala vpogled, kako dobro se je GNU Compiler Colection odrezal v primerjavi z GNU-Superoptimizer, pa èeprav pri GNU-Superoptimizer-ju nimamo rezultatov za veèje programe.
+\subsection{Optimizacija krajših programov}
+\label{rez}
+Ko je že omenjeno v poglavju \ref{priG3}, v tem poglavju so rezultati optimizacij krajših programov. Vsi primeri kod so enaki kot v toèki \ref{priG}. Prvi primer optimizacije je funkcija, ki izraèuna absolutno vrednost nekega števila. 
+\medskip
+
+\noindent
+{\it Primer dela kode:}
+\begin{Verbatim}[baselinestretch=1]
+return (v0 < 0 ? -v0 : v0);
+\end{Verbatim}
+
+Optimizator je poskušal najti optimalno kodo. To je naslednji rezultat. 
+\medskip
+
+\noindent
+{\it Predlagana rešitev:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z5abss2l:
+0x0000000000400770 <+0>: 	mov    %rdi,%rdx
+0x0000000000400773 <+3>: 	mov    %rdi,%rax
+0x0000000000400776 <+6>: 	sar    $0x3f,%rdx
+0x000000000040077a <+10>:	xor    %rdx,%rax
+0x000000000040077d <+13>:	sub    %rdx,%rax
+0x0000000000400780 <+16>:	retq 
+\end{Verbatim}
+
+Za naslednji test je optimizator iskal rešitev za enako funkcijonalnost, kot v prejšnjem testu, vendar koda je drugaèe napisana. Pri tej kodi manjka \texttt{else} stavek.
+\medskip
+
+\noindent
+{\it Primer Drugaène napisane kode:}
+\begin{Verbatim}[baselinestretch=1]
+if(x<0){x=-x;}
+return x;
+\end{Verbatim}
+
+Za ta test je optimizator dobil enak rezultat kot pri prejšnjem testu.
+
+\medskip
+
+\noindent
+{\it Ena izmed rešitev:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z4abssl:
+0x0000000000400720 <+0>: 	mov    %rdi,%rdx
+0x0000000000400723 <+3>: 	mov    %rdi,%rax
+0x0000000000400726 <+6>: 	sar    $0x3f,%rdx
+0x000000000040072a <+10>:	xor    %rdx,%rax
+0x000000000040072d <+13>:	sub    %rdx,%rax
+0x0000000000400730 <+16>:	retq   
+\end{Verbatim}
+
+Za naslednji test je bila podana funkcija, ki pove èe je število manjše, veèje ali enako številu 0. Pri tem je bila uporabljena naslednja koda.
+\medskip
+
+\noindent
+{\it Primer kode:}
+\begin{Verbatim}[baselinestretch=1]
+return (v0 > 0 ? 1 : (v0 < 0 ? -1 : 0));
+\end{Verbatim}
+
+Za ta test lahko opazimo, da optimizator ne obide nekaterih pogojnih skokov, ki bi jih sicer lahko obšli.
+\medskip
+
+\noindent
+{\it Ena izmed rešitev:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z4sgn2l:
+0x0000000000400790 <+0>: 	cmp    $0x0,%rdi
+0x0000000000400794 <+4>: 	mov    $0x1,%eax
+0x0000000000400799 <+9>: 	jle    0x4007a0 <_Z4sgn2l+16>
+0x000000000040079b <+11>:	repz retq 
+0x000000000040079d <+13>:	nopl   (%rax)
+0x00000000004007a0 <+16>:	setne  %al
+0x00000000004007a3 <+19>:	movzbl %al,%eax
+0x00000000004007a6 <+22>:	neg    %rax
+0x00000000004007a9 <+25>:	retq 
+\end{Verbatim}
+
+Za naslednji test je bila uporabljena funkcija z enako funkcijonalnostjo kot pri prejšnjem testu. Koda tokrat uporablja \texttt{else if} stavek in za vsak izpolnjen pogoj, takoj vrne rešitev.
+\medskip
+
+\noindent
+{\it Primer drugaèe zapisane kode:}
+\begin{Verbatim}[baselinestretch=1]
+if(x<0){return 1;}
+else if(x>0){return -1;}
+else{return 0;}
+\end{Verbatim}
+Ta poskus ni prinesel nobenih sprememb.
+\medskip
+
+\noindent
+{\it Ena izmed rešitev:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z3sgnl:
+0x0000000000400740 <+0>: 	cmp    $0x0,%rdi
+0x0000000000400744 <+4>: 	mov    $0x1,%eax
+0x0000000000400749 <+9>: 	jle    0x400750 <_Z3sgnl+16>
+0x000000000040074b <+11>:	repz retq 
+0x000000000040074d <+13>:	nopl   (%rax)
+0x0000000000400750 <+16>:	setne  %al
+0x0000000000400753 <+19>:	movzbl %al,%eax
+0x0000000000400756 <+22>:	neg    %rax
+0x0000000000400759 <+25>:	retq  
+\end{Verbatim}
+
+Neslednji podan primer nastavi 0, èe je število veèje ali enako 0, drugaèe 1.
+\medskip
+
+\noindent
+{\it Primer kode:}
+\begin{Verbatim}[baselinestretch=1]
+return v0 <= 0;
+\end{Verbatim}
+Optimizator najde optimalno kodo dolžine 3 inštrukcije, brez upoštevanja zadnjega \texttt{retq} ukaza, ki je ukaz za vrnitev na zadnji izveden ukaz na prejšnji funkciji.
+\medskip
+
+\noindent
+{\it Ena izmed rešitev:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z4lte2l:
+0x00000000004007b0 <+0>:	xor    %eax,%eax
+0x00000000004007b2 <+2>:	test   %rdi,%rdi
+0x00000000004007b5 <+5>:	setle  %al
+0x00000000004007b8 <+8>:	retq 
+\end{Verbatim}
+
+Kot pri ostalih poskusih, je tudi za ta test narejena še ena poskusna koda, ki pa tokrat vraèa vrednosti, takoj ko je eden izmed pogojev izpolnjen.
+
+\medskip
+
+\noindent
+{\it Primer drugaène kode:}
+\begin{Verbatim}[baselinestretch=1]
+if(x<=0){return 1;}
+else{return 0;}
+\end{Verbatim}
+Rezultat ne kaže na odvisnost, kako zapišemo kodo, zato je ostala enaka.
+\medskip
+
+\noindent
+{\it Ena izmed rešitev:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z3ltel:
+0x0000000000400760 <+0>:	xor    %eax,%eax
+0x0000000000400762 <+2>:	test   %rdi,%rdi
+0x0000000000400765 <+5>:	setle  %al
+0x0000000000400768 <+8>:	retq
+\end{Verbatim}
+\subsection{Optimizacija daljših programov}
+
+V tem poglavju so rezultati optimizacij daljših in bolj kompleksnih programov. Ti programi so bili optimizirani veèkrat z razliènimi konfiguracijami. Razlog za takšen naèin testiranja je, da ugotovimo koliko èasa se splaèa optimizirati nek program. GNU optimizator ima 3 nivoje optimizacije in direkten prevod programa. Za vsak nivo optimizacije optimizator ima vkljuèene doloèene optimizacije in naèin optimizacije. Optimizacijo vkljuèimo z zastavico \texttt{-O}. Èe hoèem doloèiti kateri nivo, moramo dodati še število od 1 do vkljuèno 3. Višji kot je nivo, bolj bo optimiziran program in veè èasa bo porabljen za optimizacijo. Ker pa je prevajalnik namenjen za standardne arhitekture procesorja in v programih obstaja pogojni skok, najdemo primerke programov kjer trditev glede optimizacije ne drži vedno.
+\medskip
+
+\noindent
+{\it Program preveden z optimizacijo \texttt{-O1}:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z3sgnl:
+0x00000000004005b7 <+0>: 	mov    %rdi,%rax
+0x00000000004005ba <+3>: 	sar    $0x3f,%rax
+0x00000000004005be <+7>: 	test   %rdi,%rdi
+0x00000000004005c1 <+10>:	mov    $0x1,%edx
+0x00000000004005c6 <+15>:	cmovg  %rdx,%rax
+0x00000000004005ca <+19>:	retq
+\end{Verbatim}
+
+\medskip
+
+\noindent
+{\it Program preveden z optimizacijo \texttt{-O2} ali \texttt{-O3}:}
+\begin{Verbatim}[baselinestretch=1]
+(gdb) Dump of assembler code for function _Z3sgnl:
+0x0000000000400740 <+0>: 	cmp    $0x0,%rdi
+0x0000000000400744 <+4>: 	mov    $0x1,%eax
+0x0000000000400749 <+9>: 	jle    0x400750 <_Z3sgnl+16>
+0x000000000040074b <+11>:	repz retq 
+0x000000000040074d <+13>:	nopl   (%rax)
+0x0000000000400750 <+16>:	setne  %al
+0x0000000000400753 <+19>:	movzbl %al,%eax
+0x0000000000400756 <+22>:	neg    %rax
+0x0000000000400759 <+25>:	retq
+\end{Verbatim}
+	%
+	\noindent
+	{\small (Optimizacija se vidi v tem, da v doloèenem pogoju program izvede manj ukazov kot v prejšnjem primeru optimizacije. Druga optimizacija je boljša, èe imamo vrednosti veèje od 0.)}
+	
+V tem poglavju bodo raziskani vsi nivoji optimizacije. Poglavje bo vsebovalo podatke o èasu izvajanja optimiziranega programa, izvajanje prevajalnika in velikost binarne kode prevedenega programa. Za raskivanje so bile uporabljene tri meritve èasa izvajanja. Prva meritev (\texttt{real}) je dejanski èas izvajanje programa oz. èas kjer uporabnik èaka na konec programa. Druga meritev (\texttt{user})je èas, ki se porabi za izvajanje ukazov v uporabniškem naèinu. V ta èas je vštet le kolièino èasa, kjer program zaseda centralno procesno enoto. Tretja meritev (\texttt{sys}) je èas izvajanje v sistemskem naèinu oz èas, ki ga program porabi med izvajanjem sistemskih klicev. Ti klici so posebne funkcije, ki se nahajajo v operacijskem sitemu in jih ne moremo optimizirat. Tako kot v prejšnji meritvi, je to meritev vštet le èas kjer je centralno procesno enota zasedena. Pri drugi in tretji meritvi moramo še upoštevati, da je dobljeni èas seštevek èasov zasedenih jedrov procesorja.Tako je lahko njuna vsota èasa veèja od dejanskega èasa izvajanja. Za prvi primer je bil podan algoritem iskanja najkrajše poti v labirintu. Labirint je predstavljen z dvodimenzionalno tabelo in vsaka celica oznaèuje ali je na tem mestu zid. Program najprej poišèe zaèetek poti, potem poišèe pot do konène toèke, in na koncu izpiše labirint z zaèetno in konèno toèko in najdeno najkrajšo pot. Algoritem iskanja deluje podobno kot algoritem izlivanje vode v labirintu.
+\medskip
+
+\noindent
+{\it Poskuani program:}
+\begin{Verbatim}[baselinestretch=1]
+#include <iostream>
+#include <fstream>
+#include <new>
+#include <inttypes.h>
+
+void find(int64_t** maze,int64_t x,int64_t y){
+	int64_t last=0;
+	int64_t targetx = 0;
+	int64_t targety = 0;
+
+	for(int64_t i=0;i < x;i++){
+		for(int64_t j=0;j < y;j++){
+			if(maze[i][j] == -2){
+				targetx = i;
+				targety = j;
+			}
+		}
+	}
+	while(maze[targetx][targety]==-2){
+		for(int64_t i=0;i < x;i++){
+			for(int64_t j=0;j < y;j++){
+				if(maze[i][j] == last){
+					if(maze[i][j+1] < -1){
+						maze[i][j+1] = last+1;
+					}
+					if(maze[i+1][j] < -1){
+						maze[i+1][j] = last+1;
+					}
+					if(maze[i-1][j] < -1){
+						maze[i-1][j] = last+1;
+					}
+					if(maze[i][j-1] < -1){
+						maze[i][j-1] = last+1;
+					}
+				}
+			}
+		}
+		last++;
+	}
+	last = maze[targetx][targety];
+	maze[targetx][targety]=-2;
+	while(last > 1){
+		if(maze[targetx+1][targety] == last-1){
+			maze[targetx+1][targety] = -4;
+			targetx++;
+		}
+		else if(maze[targetx][targety+1] == last-1){
+			maze[targetx][targety+1] = -4;
+			targety++;
+		}
+		else if(maze[targetx][targety-1] == last-1){
+			maze[targetx][targety-1] = -4;
+			targety--;
+		}
+		else if(maze[targetx-1][targety] == last-1){
+			maze[targetx-1][targety] = -4;
+			targetx--;
+		}
+		last--;
+	}
+	for(int64_t i=0;i < x;i++){
+		for(int64_t j=0;j < y;j++){
+			if(maze[i][j] > 0){
+				maze[i][j] = -3;
+			}
+		}
+	}
+}
+
+int main(int argc, char * argv[]){
+	std::fstream myfile("maze", std::ios_base::in);
+	int64_t x,y,a,b;
+	x=0;
+	y=0;
+	char c;
+	myfile >> a >> b;
+	int64_t** foo = new int64_t*[a];
+	for(int i=0;i<a;i++){
+		foo[i] = new int64_t[b];
+	}
+	while (myfile >> c){
+		if(c != '\n'){
+			if(c == '*'){
+				foo[x][y] = -1;
+			}
+			else if(c == 'S'){
+				foo[x][y] = 0;
+			}
+			else if(c == 'F'){
+				foo[x][y] = -2;
+			}
+			else{
+				foo[x][y] = -3;
+			}
+			x++;
+			if(x == a){
+				y++;
+				x=0;
+			}
+		}
+	}
+	for(int64_t i =0;i<100000;i++){
+		find(foo,a,b);
+	}
+	for(int64_t i=0;i<b;i++){
+		for(int64_t j=0;j<a;j++){
+			if(foo[j][i] == 0){
+				std::cout << 'S';
+			}
+			else if(foo[j][i] == -1){
+				std::cout << '*';
+			}
+			else if(foo[j][i] == -2){
+				std::cout << 'F';
+			}
+			else if(foo[j][i] == -4){
+				std::cout << '+';
+			}
+			else{
+				std::cout << ' ';
+			}
+		}
+		std::cout << '\n';
+	}
+	return 0;
+}
+\end{Verbatim}
+
+Najprej poglejmo meritve èasa prevajanje programa za vsak nivo optimizacije. Èe pogledamo tabelo \ref{tbl:1}, lahko opazimo, da se èasi poèasi veèajo z stopnjo optimizacije, vendar ni bistvene razlike. Torej lahko za tak kratek in preprost program izberemo najvišji nivo in s tem ne bi opazili èasovne razlike. Še posebej lahko izpostavimo, da razlika med prvo, drugo in tretjo stopnjo skoraj ne obstaja. Èas zasedenega procesorja se je za prvo nivo poveèal 30\%, za drugi nivo 35\% in za tretji nivo 37,5\%. 
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			porabljen èas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			{\tt real} & 0.204 s & 0.232 s & 0.230 s & 0.246 s \\
+			{\tt user} & 0.160 s & 0.208 s & 0.216 s & 0.220 s \\
+			{\tt sys}  & 0.016 s & 0.004 s & 0.004 s & 0.008 s
+		\end{tabular}
+	\end{center}
+	\caption{Èasi prevajanja za razlièna stopnje optimizacije}
+	\label{tbl:1}
+\end{table}
+
+Èeprav je razlika med prevajanjem ni obèutna je pa razlika èasa izvajanje programov precej obèutna. Prvo kaj lahko ugotovimo je, da že prva stopnja precej izboljša delovanje programa. Kar še lahko ugotovimo, da med drugo in tretjo stopnjo razlika skoraj ne obstaja. Prva optimizacija zmanjša èas za 60\%, druga in tretja pa za 77\%. 
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			porabljen èas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			{\tt real} & 8.544 s & 3.420 s & 1.986 s & 2.028 s \\
+			{\tt user} & 8.248 s & 3.268 s & 1.848 s & 1.880 s \\
+			{\tt sys}  & 0.000 s & 0.000 s & 0.000 s & 0.000 s
+		\end{tabular}
+	\end{center}
+	\caption{Èasi izvajanja iskanja poti 100000 krat}
+	\label{tbl:2}
+\end{table}
+
+Še zadnji stvar kar lahko pogledamo je velikost binarne predstavitve za funkcijo. Èeprav je program za vsak višji nivo bolj optimiziran, je program lahko daljši od nižjega nivoja. Èe pogledamo tabelo \ref{tbl:3} lahko opazimo, da je velikost kode najmanjša v prvem nivoju optimizacije. Èe še pogledamo tabelo \ref{tbl:4}, lahko opazimo, da ima najmanj ukazov za izvajanje. Kljub temu, pa še vedno potrebuje veè èasa za izvajanje, kot program preveden v drugem in tretjem nivoju optimizacije. Razlog se skriva v hitrosti izvajanje ukazov. Kot je je že omenjeno v poglavju 2, nekateri ukazi potrebujejo veè èasa za izvajanje ukazov (Npr. množenje). Kar se po navadi zgodi je, da program zamenja poèasen ukaz, za hitrejšega, ker pa je lahko kakšen ukaz zelo poèasen, optimizator ga zamenja s kombinacijo ukazov, ki je hitrejša. Posledica tega je veèje število ukazov. To pa še ne pojasni veèjo velikost kode, kljub manjšemu številu ukazov. Razlog se skriva v razlièni velikosti ukazov, ki jih naprava izvaja. Ena od razlag je, da programi optimizirani z drugo in tretjo stopnjo optimizatorja uporabljajo bolj kompleksne ukaze, ki so hitri in manipulirajo z veèjo kolièino podatkov, vendar za to potrebujejo veèji prostor, kjer lahko ta podatek shranijo (lahko so veliki 15 baytov).
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			funkcija & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			main & 1201 & 736 & 751 & 751 \\
+			find & 1328 & 497 & 617 & 631
+		\end{tabular}
+	\end{center}
+	\caption{Velikost binarne kode v bitih}
+	\label{tbl:3}
+\end{table}
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			funkcija & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			main & 242 & 172 & 168 & 168 \\
+			find & 327 & 146 & 156 & 151
+		\end{tabular}
+	\end{center}
+	\caption{Število ukazov za vsako funkcijo}
+	\label{tbl:4}
+\end{table}
+
+Naslednji poskusni program izvede Huffmanovo kodiranje besedila. Program najprej prebere besedilo in ga kodira. Kot rezultat izpiše kodne zamenjave za vsak simbol, ki ga najde v datoteki in kodirano besedilo z nièlami in enicami. Kot pri prejšnjem poskusu je bil najprej izmerjen èas prevajanja in optimiziranja programa na razliènih nivojih optimizacij. V tem primeru lahko opazimo, da je prevajalnik potreboval veè èasa za optimizacijo, kot za prevajanje. Èas obdelave izvorne kode se je za prvi nivo optimizacije poveèal za 18\%, za drugi nivo 74\% in za tretji nivo 105\%.
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			porabljen èas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			{\tt real} & 0.341 s & 0.393 s & 0.575 s & 0.694 s \\
+			{\tt user} & 0.296 s & 0.352 s & 0.516 s & 0.608 s \\
+			{\tt sys}  & 0.024 s & 0.032 s & 0.028 s & 0.032 s
+		\end{tabular}
+	\end{center}
+	\caption{Èasi prevajanja za razlièna stopnje optimizacije}
+	\label{tbl:5}
+\end{table}
+
+Po prevajanju je bil program zagnan. Najprej je bil zagnan postopek kodiranja besedila. Èe pogledamo v tabelo \ref{tbl:6} lahko opazimo, da smo s prvo stopnjo optimizacije precej pridobili, nadaljno optimiziranje, pa ni prineslo nobenih izboljšav. Optimiziranje za prvi nivo je prineslo izboljšavo za 75\%. Veè lahko razberemo èasovnih meritev dekodiranja besedila. Èe pogledamo tabelo \ref{tbl:7}, vidimo podobne rezultate kot v tabeli \ref{tbl:6}. Pri uporabi prvega nivoja optimizacije spet pridobimo velik delež hitrosti, nadaljno optimiziranje pa ne prinaša veliko sprememb. Èas dekodiranja se je pri optimizaciji prvega nivoja zmanjšal za 71\%, pri optimizaciji drugega nivoja za 73\% in pri optimizaciji tretjega nivoja 75\%.
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			porabljen èas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			{\tt real} & 1.149 s & 0.397 s & 0.402 s & 0.344 s \\
+			{\tt user} & 0.980 s & 0.244 s & 0.252 s & 0.256 s \\
+			{\tt sys}  & 0.012 s & 0.024 s & 0.012 s & 0.012 s
+		\end{tabular}
+	\end{center}
+	\caption{Èas kodiranja besedilne datoteke}
+	\label{tbl:6}
+\end{table}
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			porabljen èas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			{\tt real} & 17.427 s & 5.053 s & 4.855 s & 4.553 s \\
+			{\tt user} & 16.988 s & 4.956 s & 4.644 s & 4.300 s \\
+			{\tt sys}  & 0.024 s & 0.008 s & 0.008 s & 0.012 s
+		\end{tabular}
+	\end{center}
+	\caption{Èas dekodiranja besedilne datoteke}
+	\label{tbl:7}
+\end{table}
+
+Poleg èasovnih meritev, moramo še pogledat dolžino kode in število ukazov, ki jih mora naprava izvajati. Tabela \ref{tbl:9} in \ref{tbl:10} prikazujeta malo bolj zanimive podatke. Èe pogledamo ti dve tabeli, lahko opazimo, da nimamo rezultate za eno izmed funkcij. Razlog za to se skriva v optimizatorju. Kar optimizator skuša narediti je vstavljanje celotne kode namesto funkcije in optimizacija vsega in tako pridobiti hitrost. To pa lahko zelo poveèa velikost kode.
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			porabljen èas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			pnode\_compare & 85 & 32 & 31 & 31 \\
+			Encode & 1381 & 3048 & 3858 & 3826 \\
+			Decode & 948 & 981 & 1259 & 1275 \\
+			EncHuffman & 829 & - & - & - \\
+			GenerateCode & 487 & 2616 & 3427 & 3427 \\
+			DestroyNode & 146 & 1997 & 2338 & 2338 \\
+			show\_usage & 134 & 134 & 131 & 131 \\
+			main & 592 & 642 & 578 s & 578
+		\end{tabular}
+	\end{center}
+	\caption{Tabela z velikosti programa v bitih}
+	\label{tbl:9}
+\end{table}
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l|cccc}
+			porabljen èas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
+			pnode\_compare & 25 & 10 & 10 & 10 \\
+			Encode & 337 & 692 & 870 & 867 \\
+			Decode & 200 & 242 & 308 & 307 \\
+			EncHuffman & 221 & - & - & - \\
+			GenerateCode & 133 & 628 & 793 & 793 \\
+			DestroyNode & 39 & 457 & 527 & 527 \\
+			show\_usage & 28 & 27 & 27 & 27 \\
+			main & 125 & 132 & 118 & 118
+		\end{tabular}
+	\end{center}
+	\caption{Tabela s število ukazov}
+	\label{tbl:10}
+\end{table}
+
+\section{Prednosti in slabosti}
+
+Optimizator ima veliko prednosti. Poleg samodejne optimizacije glede na nivo lahko tudi sami nastavimo toèno katere optimizacije naj opravi s podanimi zastavicami. Poleg tega optimizator ne potrebuje uporabnikovega nadzora med procesom. Prednost pred ostalimi optimizatorji je tudi podpora iz strani veè skupin programerjev, ki skrbijo za razvoj programske opreme, potrebnih za prevod izvorne kode in s tem omogoèajo podporo na veè arhitekture procesorjev. Poleg tega optimizator lahko hitro in uèinkovito pohitri kodo. Slaba stran optimizatorja in posledièno tudi prevajalnika je, da nima grafiènega vmesnika in je s tem do uporabnika bolj neprijazen. Slabost prinaša tudi dejstvo, da optimizator (glede na primerke optimiziranega programa) ne implementira nakljuène elemente pri iskanju optimizirane ekvivalence izvirnega programa.

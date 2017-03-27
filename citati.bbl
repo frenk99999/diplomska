@@ -1,0 +1,83 @@
+\begin{thebibliography}{10}
+
+\bibitem{razlog}
+``A generic superoptimizer.'' Dosegljivo:
+  \url{https://anthonythecoder.wordpress.com/2016/03/04/a-generic-superoptimizer/}.
+\newblock [Dostopano: \today].
+
+\bibitem{super}
+S.~Bansal, A.~Aiken, ``Automatic generation of peephole superoptimizers,'' {\em
+  SIGOPS Oper. Syst. Rev.}, št.~5, zv.~40, str.~394--403, 2006.
+
+\bibitem{pdf5}
+T.~Crick, {\em Superoptimisation: provably optimal code generation using answer
+  set programming}.
+\newblock PhD thesis, University of Bath, 2009.
+
+\bibitem{article3}
+L.~De~Moura, N.~Bj{\o}rner, ``Z3: An efficient {SMT} solver,'' v zborniku {\em
+  Proceedings of the Theory and Practice of Software, 14th International
+  Conference on Tools and Algorithms for the Construction and Analysis of
+  Systems}, TACAS'08/ETAPS'08, Berlin, Heidelberg, str.~337--340,
+  Springer-Verlag, 2008.
+
+\bibitem{url1}
+T.~Granlund, R.~Kenner, ``Eliminating branches using a superoptimizer and the
+  {GNU C} compiler,'' {\em SIGPLAN Not.}, št.~7, zv.~27, str.~341--352, 1992.
+
+\bibitem{article4}
+S.~Heule, E.~Schkufza, R.~Sharma,, A.~Aiken, ``Stratified synthesis:
+  Automatically learning the x86-64 instruction set,'' {\em SIGPLAN Not.},
+  št.~6, zv.~51, str.~237--250, 2016.
+
+\bibitem{article2}
+R.~Sharma, E.~Schkufza, B.~Churchill,, A.~Aiken, ``Data-driven equivalence
+  checking,'' {\em SIGPLAN Not.}, št.~10, zv.~48, str.~391--406, 2013.
+
+\bibitem{pdf4}
+T.~Hume, ``Literature review: Superoptimizers.'' Dosegljivo:
+  \url{http://www.sis.uta.fi/~pt/TIEA5_Thesis_Course/Session_09_2013_02_15/Example%20Literature%20Reviews/Example%20Literature%20review%20Chronological.pdf},
+  2011.
+\newblock [Dostopano: \today].
+
+\bibitem{branch}
+A.~J. Hutton, C.~C. Ross, B.~Elliston, J.~Johnson, M.~Mitchell, T.~Morita,
+  D.~Novillo, G.~Pfeifer, I.~Lance, C.~C. Ross,, R.~A. Sayle, ``A
+  superoptimizer analysis of multiway branch code generation,'' v zborniku {\em
+  Proceedings of the GCC Developers' Summit}, str.~103--117, 2008.
+
+\bibitem{pdf2}
+H.~Massalin, ``Superoptimizer: A look at the smallest program,'' {\em SIGPLAN
+  Not.}, št.~10, zv.~22, str.~122--126, 1987.
+
+\bibitem{avoid}
+F.~Mueller, D.~B. Whalley, ``Avoiding conditional branches by code
+  replication,'' v zborniku {\em In Proceedings of the ACM SIGPLAN'95
+  Conference onProgramming Language Design and Implementation (PLDI)},
+  str.~56--66, 1995.
+
+\bibitem{pdf6}
+J.~S{\"a}rnesj{\"o}, {\em Using Binary Decision Diagrams to Determine Program
+  Equivalence in a Superoptimizer}.
+\newblock PhD thesis, KTH, School of Computer Science and Communication (CSC),
+  2011.
+
+\bibitem{article1}
+E.~Schkufza, R.~Sharma,, A.~Aiken, ``Stochastic superoptimization,'' {\em
+  SIGPLAN Not.}, št.~4, zv.~48, str.~305--316, 2013.
+
+\bibitem{article5}
+E.~Schkufza, R.~Sharma,, A.~Aiken, ``Stochastic program optimization,'' {\em
+  Commun. ACM}, št.~2, zv.~59, str.~114--122, 2016.
+
+\bibitem{float2}
+E.~Schkufza, R.~Sharma,, A.~Aiken, ``Stochastic optimization of floating-point
+  programs with tunable precision,'' {\em SIGPLAN Not.}, št.~6, zv.~49,
+  str.~53--64, 2014.
+
+\bibitem{sto}
+R.~Sharma, E.~Schkufza, B.~Churchill,, A.~Aiken, ``Conditionally correct
+  superoptimization,'' {\em SIGPLAN Not.}, št.~10, zv.~50, str.~147--162,
+  2015.
+
+\end{thebibliography}

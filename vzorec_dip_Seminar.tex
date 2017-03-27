@@ -354,13 +354,11 @@ V današnjem času nam je pisanje programov precej olajšano. Za pisanje lahko u
 V današnjem času nam je pisanje programov precej olajšano. Za pisanje lahko uporabimo visoko nivojske jezike (kot so Java, C, C++, Python itd) ali pa psevdo ukaze. Vendar moramo programe v večini primerov prevesti v strojno kodo, da jo lahko računalnik požene. Če pa bi si podrobno ogledali to strojno kodo, bi v nekaterih primerih opazili, da se prevedena koda ne ujema s izvorno kodo, klub temu, da je funkcijonalnost takega programa enaka kot v izvirni kodi. To je zato, ker prevajalnik v neki časovni meji optimizira kratke dele programa (ponavadi eno ali dve inštrukciji v skupini). Optimiziran program igra zelo pomebno vlogo saj lahko tak program izvede več stvari, nam omogoča dodajanje dodatnih funkcij in/ali zmanjšuje porabo omejenih virov.
 \section{Zgodovina}
 \subsection{Prvi optimizator} 
-Prvi primer poskusov se najde že leta 1987.  Superoptimizer vzame program napisan v strojnem jeziku kot vhodni vir. Ugotovi  najkrajši program, ki izračuna enako funkcijo kot izvorni program z izčrpnim iskanjem preko vseh možnih programov. Prostor iskanja je opredeljen z izbiro podskupinskega nabora strojnih ukazov, in funkcionalno enak vendar optimiziran nabor ukazov shranjenih v tabeli \cite{pdf1}. Superoptimizator s pomočjo te tabele generira kodo, najprej dolžine 1, nato dolžine 2, in tako naprej. Vsak od teh ustvarjenih programov je testiran, in če je ugotovljeno, da se funkcija izvirnega programa ujema, superoptimizator natisne program in konča. Za skrajšanje časa za iskanje uporablja dve metodi. Prvi je hiter probabilističen test za določanje ekvivalence dveh programov. Druga je metoda obrezovanje preiskovalnega prostor, medtem pa ohranja jamstvo optimalnosti. Ker pa program ni mogel optimizirati kode daljše od 12 inštrukcij, je bila njegova uporabnost majhna \cite{pdf2}.
+Prvi primer poskusov se najde že leta 1987 \cite{pd2}. Superoptimizer vzame program napisan v strojnem jeziku kot vhodni vir. Ugotovi  najkrajši program, ki izračuna enako funkcijo kot izvorni program z izčrpnim iskanjem preko vseh možnih programov. Prostor iskanja je opredeljen z izbiro podskupinskega nabora strojnih ukazov, in funkcionalno enak vendar optimiziran nabor ukazov shranjenih v tabeli. Superoptimizator s pomočjo te tabele generira kodo, najprej dolžine 1, nato dolžine 2, in tako naprej. Vsak od teh ustvarjenih programov je testiran, in če je ugotovljeno, da se funkcija izvirnega programa ujema, superoptimizator natisne program in konča. Za skrajšanje časa za iskanje uporablja dve metodi. Prvi je hiter probabilističen test za določanje ekvivalence dveh programov. Druga je metoda obrezovanje preiskovalnega prostor, medtem pa ohranja jamstvo optimalnosti. Ker pa program ni mogel optimizirati kode daljše od 12 inštrukcij, je bila njegova uporabnost majhna.
 \subsection{GNU-Superoptimizer}
 Razvinjanje se je nadaljevalo v letu 1992 z kombiniranjem GNU C prevajalnikom in GSO superoptimizatorjem. GSO je približno 3000 vrstic kode C in je od gostitelja neodvisna. Za razliko od prvih suprotimizatorjev, superoptimizer GSO išče zaporedij navodil, izračuna eno več ciljnih funkcij, ki so bili prevedeni v GSO. Željeni cilj je izbran z možnostjo ukazne vrstice z imenon mnemonika. GSO generira zaporedja kode za veliko različnih ciljnih naprav in je zasnovan tako, da so lahko dodatne ciljne naprave enostavno dodane. Trenutno GSO podpira IBM RS / 6000, Sparc, Motorola 68K in 88k, AMD 29k in Intel 80386. Prenosljivost je dosežena z opredelitvijo splošnih inštrukcij, ki vključujejo združitev vseh navodili, ki jih GSO podpira pri vseh podprtih naprav \cite{url1}.
 \subsection{STOKE}
 Leta 2013 so razvili stohastičen superoptimizator. Stohastičen optimizator uporablja brez zančni superoptimizacijsko nalogo kot stohastični problem iskanja. Konkurenčne omejitve od preoblikovanja pravilnosti in izboljševanja delovanja so kodirani kot izrazi v odvisnosti stroškov, ter Markov Chain Monte Carlo vzorčevanje se uporablja za hitro raziskovanje prostora vseh možnih programov, da najde tisti program, ki je optimizacija danega ciljnega programa. Čeprav njihova metoda žrtvuje popolnosti, obseg programov, programe ki jih sposoben preučiti in kakovost programov, ki jih posledično proizvaja, daleč presegajo tiste proizvedene od obstoječih superoptimizatorjev. Že binarne datotek, prevedene z  llvm -O0 izbranim za 64-bitne x86, njihova izvedba prototipa, STOKE, je sposobna proizvajati programe, ki bodisi so enako dobre ali prekašajo kodo, ki jih generira gcc -O3, icc -O3, in v nekaterih primerih tudi strokovno lastnoročno napisano kodo \cite{article1,article5}.
-\subsection{GNU Compiler Colection}
-GCC je napisal Richard Matthew Stallman leta 1987 kot prevajalnik za projekt GNU, tako da bi bil na voljo kot prosto programje. Njegov razvoj je večinoma vodila Free Software Foundation. Skupina razvijalcev, ki je bila nezadovoljna s počasnim napredovanjem in zaprto naravo uradnega razvoja GCC, je leta 1997 razvila projekt z imenom EGCS (Experimental/Enhanced GNU Compiler System). S projektom so povezali več preizkusnih odcepljenih programov v posamezen projekt, izvirajoč iz GCC. Razvoj EGCS se je kasneje pokazal za precej bolj življenjskega od razvoja GCC, tako da so aprila 1999 končno določili kot uradno različico GCC. Sedaj GCC vzdržuje več skupin programerjev iz celega sveta. Prenesli so ga na več različnih vrst procesorjev in operacijskih sistemov kot kateri drugi prevajalnik. GCC velikokrat izberejo za razvoj programske opreme, ki se bo izvajala na različni strojni opremi. Razlike domačih prevajalnikov vodijo do težav v razvijajoči programski kodi, ki se naj bi pravilno prevedla na vseh prevajalnikih in v izdelanih skriptah, ki bodo tekle na vseh platformah. Z uporabo GCC je enak razčlenjevalni program za vse platforme, in če se koda prevede na enem sistemu, je večja verjetnost, da se bo prevedla tudi na drugem. V nekaterih primerih GCC naredi počasnejše izvršne programe kot drugi prevajalniki, vendar se ga zaradi prostosti in možnih manjših razvojnih stroškov splača uporabiti \cite{gcc2}.
 \section{Uporabjene metodologije}
 Pri tej diplomski nalogi bodo uporabljene naslednje metodologije:
 \begin{itemize}
@@ -379,19 +377,19 @@ Pri tej diplomski nalogi bodo uporabljene naslednje metodologije:
 \section{Cilji in predvidevani rezultati diplomske naloge}
 Cilj diplomske naloge je razložitit in ponazoriti, kako do sedaj razviti optimizatorji delujejo in poiskati odgovore na naslednja vprašanja: Ali lahko uporabimo stari optimizator in če lahko ali je njegova uporabnost večja, ali lahko superoptimizator razširimo na več arhitektur centralno procesne enote in če lahko, kako, kako dobra bi bila optimizacija, če bi časovno omejitev izpustili in kakšni so rezultati pri uporabi takega superoptimizatorja. Dodaten cilj je še narediti izvirno kodo z implementacijo superotimizatora. Ker pa so cilji lahko preveč visoki je možno, da nekaterih ciljev ne bomo dosegli in tudi rezultati ne bodo uspešni.
 \section{Pripravljeno okolje za testiranje}
-Ker so rezultati odvisni od programske opreme in strojne opreme, je pomembno omeniti, kje so bili primerki testirani, kakšen je bil način testiranja in zmogljivost naprave, ki je bila uporabljena pri testiranju. Raziskava je potekala na prenosnem računalniku z Intel Core i5-4200M centralno procesni enoti, z frenkvenco 2.5Ghz. Model centralno procesne enote najdemo v skupini Sandy Bridge. Na napravi je nameščen Windows 8.1 operacijski sistem. Optimizatorji, ki so bili uporabljeni za raziskavo, niso podprti za ta operacijski sistem. Za zagon je v potreben linux operacijski sistem Ubuntu 14.04. To oviro je bilo mogoče obiti s pomočjo programa VirtualBox. Virtual box je program, ki ustvari okolje za navidezno napravo \cite{box}, navidezna naprava pa deluje kot, pravi računalnik. V navidezni napravi je nameščen Ubuntu in vsa testiranja in raziskave so potekala v tem okolju. Za navidezno napravo je bilo dodeljeno 1024 MB prostorja na navideznem pomnilniku. 
+Ker so rezultati odvisni od programske opreme in strojne opreme, je pomembno omeniti, kje so bili primerki testirani, kakšen je bil način testiranja in zmogljivost naprave, ki je bila uporabljena pri testiranju. Raziskava je potekala na prenosnem računalniku z Intel Core i5-4200M centralno procesni enoti, z frenkvenco 2.5Ghz. Model centralno procesne enote najdemo v skupini Sandy Bridge. Na napravi je nameščen Windows 8.1 operacijski sistem. Optimizatorji, ki so bili uporabljeni za raziskavo, niso podprti za ta operacijski sistem. Za zagon je v potreben linux operacijski sistem Ubuntu 14.04. To oviro je bilo mogoče obiti s pomočjo programa VirtualBox. Virtual box je program, ki ustvari okolje za navidezno napravo, navidezna naprava pa deluje kot, pravi računalnik. V navidezni napravi je nameščen Ubuntu in vsa testiranja in raziskave so potekala v tem okolju. Za navidezno napravo je bilo dodeljeno 1024 MB prostorja na navideznem pomnilniku. 
 \section{Pojasnilo kode v zbirniku}
-Jezik ki ga ti optimizatorji napišejo je strojni jezik. Ker pa je tak jezik težko berljiv, bo koda zapisana v zbirniku. Ker pa je lahko tak zapis za neizkušene zapleten, bo v tem poglavju pojasnjeno osnovno o takem zapisu. Zapis bo uporabljen za Intel arhitekturo centralno procesne enote. Ukazi lahko imajo več formatov, vendar običajno prevladuje en formata. Prvih nekaj bitov vedno predstavlja operacijsko kodo. Operacijska koda pove, kaj na naredi z vrednosti v registru in v pomnilniku. Ostalo pa so operandi, ki tipično opisujejo vrednost ali pa ime registra. Vsaka operacijska koda ima nič ali več operandov. Ponavadi sta dva. Format, ki prevladuje ima dva operanda. Operand lahko vsebuje tudi takojšnje vrednost. Registri so ponavadi predznačeni z znakom \r (nekateri registri imajo svoja imena \cite{asem}), v Intel zbirniku pa so predznačeni s simbolom \texttt{\%}. Poleg tega je dolžina ukaza lahko različna.
+Jezik ki ga ti optimizatorji napišejo je strojni jezik. Ker pa je tak jezik težko berljiv, bo koda zapisana v zbirniku. Ker pa je lahko tak zapis za neizkušene zapleten, bo v tem poglavju pojasnjeno osnovno o takem zapisu. Zapis bo uporabljen za Intel arhitekturo centralno procesne enote. Ukazi lahko imajo več formatov, vendar običajno prevladuje en formata. Prvih nekaj bitov vedno predstavlja operacijsko kodo. Operacijska koda pove, kaj na naredi z vrednosti v registru in v pomnilniku. Ostalo pa so operandi, ki tipično opisujejo vrednost ali pa ime registra. Vsaka operacijska koda ima nič ali več operandov. Ponavadi sta dva. Format, ki prevladuje ima dva operanda. Operand lahko vsebuje tudi takojšnje vrednost. Registri so ponavadi predznačeni z znakom \r (nekateri registri imajo svoja imena), v Intel zbirniku pa so predznačeni s simbolom \texttt{\%}. Poleg tega je dolžina ukaza lahko različna.
 \chapter{Splošen pregled optimiziranja}
 V tem poglavju bo omenjen splošen način optimiziranja. Pri tem bodo omenjena pravila, ki jih moramo upoštevati in na kaj moramo paziti pri določenih operandih. Poglavje je razdeljeno ne 3 dele: optimizacije brez skokov, s skoki in optimizacija klicev funkcij.
 \section{Optimizacija kode brez skokov}
 \label{fl}
-Optimizacija kode brez skokov je optimizacija programa ali dela programa, ki ne vsebuje skoke. S tem lahko predpostavimo, da se vrstni red izvajanje ukazov ne bo spreminjal. To nam omogoča, da lahko spreminjamo vrtni red ukazov, kjer je lahko eden izmed zadnjih ukazov med prvimi izveden in pri tem se funkcijonalnost ne spremeni. Položaj, od kje do kje lahko premikamo nek ukaz, je odvisno od kdaj smo nekemu registru, ki ga ukaz uporablja, priredili vrednost. Z drugimi besedami, vrstni red ukazov lahko spreminjamo dokler za vsak register velja, da je število branj registra med vsakim parom prirejanj istega registra enak izhodiščni kodi. Pri tem lahko vrstni red branj registra poljuben razen v primeru kjer v ukazu beremo in prirejamo iz istega registra. V tem primeru mora biti branje zadnje v vrstnem redu, saj vrednost registra najprej preberemo in nato priredimo. Pri tem lahko opazimo prvo mogočo optimizacijo. Če med dvema prirejanja istega registra ni branja iz tega registra, potem je prvo prirejanje odveč in ga lahko odstranimo. Pri premikanju ukazu lahko dobimo zaporedne ukaze z enako operacijsko kodo. Pri tem je lahko možno, da ju združimo. Pri tem moramo pogledat kateri registri se pojavijo v operandu. Obstaja tudi optimizacija, kjer lahko namesto ene operacije uporabimo drugo operacijo, saj druga operacija porabi manj urinih ciklov kot prva operacija (Npr. moženje z 2, porabi več časa kot aritmetični premik v desno). Na koncu imamo še kombinacijo ukazov, ki lahko zamenjamo z drugo kombinacijo ukazov, ki je hitrejša od prve. Tako združevanje pa ni vedno mogoč. Prvo težavo predstavlja deljenje celih števil. Recimo, da imamo dva zaporedna ukaza deljenje in množenje s število 5 in registru imamo število 6. Če izvedemo ta dva ukaza, bi imeli v registru na koncu vrednost 5. Če pa bi naivno združili ta dva ukaza, bi na koncu ostala vrednost 6. Drugi večji problem predstavljajo števila s plavajočo vejico (decimalna števila). Decimalna števila so v registru predstavljena z eno bitnim predznakom, 11 bitno eksponento in 52 bitno mantiso \cite{float}. Tako število je pogosto po kakršnikoli operaciji predstavljeno z vrednostjo, ki je najbližji tej vrednosti. Z drugimi besedami je možno da se vrednost, ki jo dvakrat seštejmo manjšo vrednost z večjo, in vrednost, ki jo seštejemo z isto večjo vrednostjo z vsoto istimi manjšimi vrednosti, lahko razlikujeta. Zaradi tega se večina optimizatorjev ne ukvarja z optimizacijo takih števil \cite{float2}. Nazadnje moramo še paziti na vrednosti v posebnih registrih in zastavicah. Program lahko optimiziramo tudi tako, da uporabimo še dodatne registre za shranjevanje določenih vrednosti, ki jih v kodo večkrat uporabimo.
+Optimizacija kode brez skokov je optimizacija programa ali dela programa, ki ne vsebuje skoke. S tem lahko predpostavimo, da se vrstni red izvajanje ukazov ne bo spreminjal. To nam omogoča, da lahko spreminjamo vrtni red ukazov, kjer je lahko eden izmed zadnjih ukazov med prvimi izveden in pri tem se funkcijonalnost ne spremeni. Položaj, od kje do kje lahko premikamo nek ukaz, je odvisno od kdaj smo nekemu registru, ki ga ukaz uporablja, priredili vrednost. Z drugimi besedami, vrstni red ukazov lahko spreminjamo dokler za vsak register velja, da je število branj registra med vsakim parom prirejanj istega registra enak izhodiščni kodi. Pri tem lahko vrstni red branj registra poljuben razen v primeru kjer v ukazu beremo in prirejamo iz istega registra. V tem primeru mora biti branje zadnje v vrstnem redu, saj vrednost registra najprej preberemo in nato priredimo. Pri tem lahko opazimo prvo mogočo optimizacijo. Če med dvema prirejanja istega registra ni branja iz tega registra, potem je prvo prirejanje odveč in ga lahko odstranimo. Pri premikanju ukazu lahko dobimo zaporedne ukaze z enako operacijsko kodo. Pri tem je lahko možno, da ju združimo. Pri tem moramo pogledat kateri registri se pojavijo v operandu. Obstaja tudi optimizacija, kjer lahko namesto ene operacije uporabimo drugo operacijo, saj druga operacija porabi manj urinih ciklov kot prva operacija (Npr. moženje z 2, porabi več časa kot aritmetični premik v desno). Na koncu imamo še kombinacijo ukazov, ki lahko zamenjamo z drugo kombinacijo ukazov, ki je hitrejša od prve. Tako združevanje pa ni vedno mogoč. Prvo težavo predstavlja deljenje celih števil. Recimo, da imamo dva zaporedna ukaza deljenje in množenje s število 5 in registru imamo število 6. Če izvedemo ta dva ukaza, bi imeli v registru na koncu vrednost 5. Če pa bi naivno združili ta dva ukaza, bi na koncu ostala vrednost 6. Drugi večji problem predstavljajo števila s plavajočo vejico (decimalna števila). Decimalna števila so v registru predstavljena z eno bitnim predznakom, 11 bitno eksponento in 52 bitno mantiso. Tako število je pogosto po kakršnikoli operaciji predstavljeno z vrednostjo, ki je najbližji tej vrednosti. Z drugimi besedami je možno da se vrednost, ki jo dvakrat seštejmo manjšo vrednost z večjo, in vrednost, ki jo seštejemo z isto večjo vrednostjo z vsoto istimi manjšimi vrednosti, lahko razlikujeta. Zaradi tega se večina optimizatorjev ne ukvarja z optimizacijo takih števil \cite{float2}. Nazadnje moramo še paziti na vrednosti v posebnih registrih in zastavicah. Program lahko optimiziramo tudi tako, da uporabimo še dodatne registre za shranjevanje določenih vrednosti, ki jih v kodo večkrat uporabimo.
 \section{Optimizacija kode s skoki}
-Optimizacija kode s skoki je optimizacija, ki optimizira program ali del programa, ki ima v svoji kodi ukaz za skok. To pomeni, da vrstni red izvajanja ukazov ni enak vrstnemu redu ukazov zapisanega v programu. To predstavlja nov problem, saj moramo biti pozorni na žive registre pred skokom in žive registre na lokaciji kjer se izvede prvi ukaz po skoku. Težavo obidemo tako, da kodo razdelimo na dele. Del kode lahko zavzema med skokoma, med skokom in lokacijo prvega ukaza po skoku in med dvema lokacijama prvega ukaza po skoku. Ukazi, ki so v določenem delu kode morajo ostati v tem delu. Optimizacijo lahko naredimo pri pogojnih skokih. Če lahko izračunamo kakšne vrednosti lahko nek pogoj zavzema, potem lahko izračunamo, če bo ta pogoj vedno izpolnjen ali neizpolnjen. Če lahko, potem lahko odstranimo nasprotno vejo, ker se ta veja ukazov ne bi nikoli izvajala. Problem je, da ta vrednost ni vedno izračunljiva. Kar še lahko naredimo je optimizacija zanke. Recimo, da imamo zanko kjer je pogoj da se na določenem registru nahaja število \(m\), ki je manjše od \(n\). To število \(m\) dobimo tako, da pomnožimo število \(j\), ki ga povečujemo po vsaki opravljeni iteraciji za 1, s številom \(k\). Namesto, da bi za vsak pogoj morali ponovno množiti, bi lahko število \(j\) povečali za \(k\). Še en način optimizacije je izigibanjem pogojnih skokov z podvajanjem kode. Če ima kakšna zanka več pogojev, potem je lahko možno, da to zanko podvojimo tako, da v prvi zanki ostane en pogoj, v drugi pa drugi pogoj. S takimm načinom se lahko tudi izognemo izvajanu \texttt{if} stavkov, če pogoj ni odvisen od spremenljiv v zankah \cite{avoid}.
+Optimizacija kode s skoki je optimizacija, ki optimizira program ali del programa, ki ima v svoji kodi ukaz za skok. To pomeni, da vrstni red izvajanja ukazov ni enak vrstnemu redu ukazov zapisanega v programu. To predstavlja nov problem, saj moramo biti pozorni na žive registre pred skokom in žive registre na lokaciji kjer se izvede prvi ukaz po skoku. Težavo obidemo tako, da kodo razdelimo na dele. Del kode lahko zavzema med skokoma, med skokom in lokacijo prvega ukaza po skoku in med dvema lokacijama prvega ukaza po skoku. Ukazi, ki so v določenem delu kode morajo ostati v tem delu. Optimizacijo lahko naredimo pri pogojnih skokih. Če lahko izračunamo kakšne vrednosti lahko nek pogoj zavzema, potem lahko izračunamo, če bo ta pogoj vedno izpolnjen ali neizpolnjen. Če lahko, potem lahko odstranimo nasprotno vejo, ker se ta veja ukazov ne bi nikoli izvajala. Problem je, da ta vrednost ni vedno izračunljiva. Kar še lahko naredimo je optimizacija zanke. Recimo, da imamo zanko kjer je pogoj da se na določenem registru nahaja število \(m\), ki je manjše od \(n\). To število \(m\) dobimo tako, da pomnožimo število \(j\), ki ga povečujemo po vsaki opravljeni iteraciji za 1, s številom \(k\). Namesto, da bi za vsak pogoj morali ponovno množiti, bi lahko število \(j\) povečali za \(k\). Še en način optimizacije je izigibanjem pogojnih skokov z podvajanjem kode. Če ima kakšna zanka več pogojev, potem je lahko možno, da to zanko podvojimo tako, da v prvi zanki ostane en pogoj, v drugi pa drugi pogoj. S takimm načinom se lahko tudi izognemo izvajanu \texttt{if} stavkov, če pogoj ni odvisen od spremenljivk v zankah \cite{avoid}.
 \section{Optimizacija klicev funkcij}
 Pri optimizaciji funkcije veljajo pravila kot pri optimizaciji s skoki. Pri tem še obstaja pravilo, da vsakemu registru, ki ga uporabimo v klicani funkciji, moramo shraniti njegovo stanje. Izjeme so posebni registri, globalni registri (oz. registri za katere je dogovorjeno, da niso definirani ob klicu) in register za vračanje vrednosti. Pri optimizaciji klicev funkcije, skušamo klic obiti. Namesto klica funkcije bi lahko vstavili kodo. To bi prineslo možnost bolj optimizirane kode in izpust vhodnega in izhodnega dela funkcije. Rezultat take optimizacije, bi bila hitrejša koda za ceno prostorja na pomnilniku, kar bi bilo vredno, če je koda dovolj kratka. Če se taka optimizacija ne splača, potem imamo še eno vrsto optimizacije, ki skuša uporabiti, čim manj lokalnih registrov in čim več globalnih registrov za izvajanje funkcije.  
-\chapter{GNU-Superoptimizer \cite{sup1}}
+\chapter{GNU-Superoptimizer}
 \label{ch2}
 Prvi superotimizator je bil razvit leta 1987, leta 1992 pa ga izboljšali in  kombinirali s prevajalnikom C. Kot je že v uvodnem poglavju omenjeno GSO optimizator je dolg približno 3000 vrstic kode C in je od gostitelja neodvisna. Za razliko od prvih suprotimizatorjev, superoptimizer GSO išče zaporedij navodil, izračuna eno več ciljnih funkcij, ki so bili prevedeni v GSO. Željeni cilj je izbran z možnostjo ukazne vrstice z imenon mnemonika. GSO generira zaporedja kode za veliko različnih ciljnih naprav in je zasnovan tako, da so lahko dodatne ciljne naprave enostavno dodane. Trenutno GSO podpira IBM RS / 6000, Sparc, Motorola 68K in 88k, AMD 29k in Intel 80386. Prenosljivost je dosežena z opredelitvijo splošnih instrukcij, ki vključujejo združitev vseh navodili, ki jih GSO podpira pri vseh podprtih naprav \cite{url1}.
 
@@ -500,7 +498,7 @@ DEF_INSN (ADD_CIO,      'b', "add_cio")
 {\small (Primer kode se najde v datoteki superopt.def (vrstice 329-333))}
 	 
 	\subsection{Zagon}
-	Kot je že omenjeno v \ref{prev}, program moramo najprej prevesti preden lahko zaženemo program. Za to potrebujemo C prevajalnik (Linux že ima prevajalnik nameščen, za windows obstaja program Cygwin \cite{cygwin}). Prevajanje zaženemo tako, da v  ukazni vrstici zaženemo skripto datoteke Makefile in ji kot argument podamo ime procesorja, ki se nahaja na seznamu podprtih procesorjev. Ko je program preveden, ga zažene v ukazni vrstici z naslednjim formatom ukaza.
+	Kot je že omenjeno v \ref{prev}, program moramo najprej prevesti preden lahko zaženemo program. Za to potrebujemo C prevajalnik (Linux že ima prevajalnik nameščen, za windows obstaja program Cygwin). Prevajanje zaženemo tako, da v  ukazni vrstici zaženemo skripto datoteke Makefile in ji kot argument podamo ime procesorja, ki se nahaja na seznamu podprtih procesorjev. Ko je program preveden, ga zažene v ukazni vrstici z naslednjim formatom ukaza.
 	\medskip
 	
 	\noindent
@@ -522,7 +520,7 @@ superopt -fabs -shifts -extracts -max-cost 6
 	{\small (ukaz kjer optimizator najde vse možne optimalne rešitve manjše za cilj abs, in pri tem vključuje še dodatne ukaze. Pri tem mora biti optimalna rešitev manjša od 6)}
 	\subsection{Način optimiziranja}
 	
-	V tem poglavju bo povzet način optimiziranja GSO optimizatorja omenjen v \cite{url1,pdf4,pdf2}. Program deluje na osnovi podanih ciljev in množici ukazov, programiranih v samem optimizatorju. Program skuša za te ciljev zgraditi zaporedje ukazov, ki je ekvivalenten tej kodi. Pri tem uporablja razširjeno iskanje, kar pomeni, da preizkuša vse možne kombinacije. Ker je lahko zaporedje različno dolgo, program začne z dolžino 1 in v primeru če ne najde rešitve, jo povečuje za 1. Program konča delovanje v primeru, če najde eno ali več rešitev, ali če preseže največjo dovoljeno dolžino, ki ga programer poda. Najdene rešitve potem izpiše v terminal. Po želji lahko program izpiše tudi v zbirnem jeziku. Program išče rešitev rekurzivno kar pomeni, da se iskanje nadaljuje v globino. Med generiranjem program uporablja operande oz. registre, ki so bili podani na vhodu ali generirani zaradi prejšnjih inštrukcij. Če prenosni bit ni nastavljen, potem instrukcije, ki uporabljajo ta bit, ne bodo generirani. Na začektu iskanja prenosni bit ni definiran in dolžina zaporedja ukazov je enaka nič. Pri vsaki rekurziji program pokliče funkcijo \texttt{synth}, ki poišče list vseh definiranih ukazov in doda zaporedju en ukaz. Ker različne arhitekture zahtevajo različno število operandov, program mora imeti funkcije, ki bodo to dejstvo upoštevali. V tem primeru so težavo rešili z različnimi \texttt{synth} funkcijami, katerih lahko dostopajo le določene naprave. Pri tem je še treba poudariti, da se ukaz, ki preneša vrednost iz enega registra v drugi register, ne generira pri napravah, ki imajo 3-operandne ukaze, saj ukaz ni optimalen. Pri vsakem generiranem zaporedju program preveri njegovo delovanje na naključno izbranimi vrednosti, in če se rezultati ujemajo, potem nadaljuje z bolj obširnim preverjanjem. Če zaporedje ukazov opravi test, potem ga izpiše. Pri tem je zelo majhna verjetnost, da program izpiše tudi neekvivalentno kodo. Za pospešitev delovanja, optimizator uporablja manjhno število konstant v zaporedju (Npr. -1, 0, 1, \(2^{31}-1\) in \(2^{31}\)). Posledica take omejitve, je povečana možnost, da optimizator zgreši optimizirano kodo. Kar je še treba poudariti, da kodo, ki jo program generira ne izvaja, na procesorju temveč jo z raznimi \texttt{PERFORM} metodami, dodeljen za vsak ukaz, simulira. Poleg osnovnega algoritma, obstjajo še nekatere predelane verzije, ki jih GSO v tem dokumentu nima implementiranih. Prva izmed idej je, da bi poleg uporabe testnih primerov, uporabili preverjanje z binarnim diagramov odločanja \cite{pdf6}. Idea takega iskanja ekvivalence je, da vsak bit v registru predstavlja boolean spremenljivko in vsaka operacija predstavlja odvisnost med biti pri izvedbi enega ukaza. Rezultat take predstavitve je graf, kjer vozlišče predstavlja boolean spremenljivko. Problem takega alogoritma se pojavi v predstavitvi bolj kompleksnih funkcij, kot so množenje in deljenje, saj je posledica tega zelo velik graf in posledično tudi program potrebije zelo veliko časa za dokazovanje ekvivalence. Druga ideje združuje poglavje o optimizaciji večvejitvenih poteh (Npr. \texttt{switch} stavki) in GSO. Dokument \cite{branch} opisuje kako naj bi optimizirali več vejitveno kodo z predelano verzijo superoptimizatorja. Superoptimizator naj bi vseboval predelano binarno drevo, ki prestavljalo vejitev skokov na določeno kodo. Vsaka točka v drevesu predstalja število ali operacijo in vsaka poveza bi predstavljal pot izpolnjenega ali neizponjega pogoja. Koren drevesa se vedno začne s številom in ima povezavo do primerjalnega operatorja. Primerjalni operator potem to število uporabi za primerjanje vrednosti. V drevesu je možno, da sta na poti po drevesu navzdol zaporedno povezana dva primerjalna operatorja. V tem primeru bi algoritem vzel zadnjo prebrano vrednost na poti. Po končani optimizaciji bi optimizator nadaljeval z oprimizacijo vsake veje posebej. Še ena bolj zanimiva verzija je uporaba kombinacije superoptimizatorja in podatkovne baze \cite{super}. Idea je, da program le generira avtomatično generira pravila, ter jih zapiše v podatkovno bazo, baza pa je kaseneje uporabjena za podporo prevajalniku pri optimizaciji kode. Optimizatorju je podan testni program, iz katerega vleče kodo, za optimizacijo. Vsaka izvlečena koda se izvede na testni napravi. Na koncu izvajanja, program zabeleži vse žive registre in stanje naprave. Za to stanje izračuna hash vrednost, ter jo s temu primernim zaporedjem ukazov v tabelo vstavi. Med izvajanjem tega algoritma, optimizator izvaja podoben algoritem kot pri GSO, ter generirano kodo izvede. Izvajanje poteka na dveh fiksnih stanji naprave. Za vsako generirano kodo, program poišče v tablei, če je v njej že shranjena izračunana hash vrednonst. V primeru najdene take vrednosti, optimizator preveri ekvivalenco in jo v primeru dokazane ekvivalence zapiše v podatkovno bazo. Če ne najde enake vrednosti, potem jo zavrže. Enako kot pri originalni različici, je tudi tu pri generiranju kode uporabljena omejena količina operacijskih kod. Poleg tega je potrebno vsako zaporedje posplošiti, saj bi bila količina primerov prevelika. Postopek posploševanja je relativno enostavno. Za vsak register in konstanto priredimo novo ime. Pri tem velja pravilo, da preimenujemo spremenljivke v zaporedju, kot jih koda izvaja. Pri tem algoritmu je še ena omejitev, vsaka izvlečena kone ne sme vsebovati točko vstopa v segment kode, kjer skok izvira iz segmenta. Poleg tega generirana kode ima le en skok izven segment. Pri je še dodatno omejena na največ 4 različne registre. 
+	V tem poglavju bo povzet način optimiziranja GSO optimizatorja omenjen v \cite{url1,pdf4,pdf2}. Program deluje na osnovi podanih ciljev in množici ukazov, programiranih v samem optimizatorju. Program skuša za te ciljev zgraditi zaporedje ukazov, ki je ekvivalenten tej kodi. Pri tem uporablja razširjeno iskanje, kar pomeni, da preizkuša vse možne kombinacije. Ker je lahko zaporedje različno dolgo, program začne z dolžino 1 in v primeru če ne najde rešitve, jo povečuje za 1. Program konča delovanje v primeru, če najde eno ali več rešitev, ali če preseže največjo dovoljeno dolžino, ki ga programer poda. Najdene rešitve potem izpiše v terminal. Po želji lahko program izpiše tudi v zbirnem jeziku. Program išče rešitev rekurzivno kar pomeni, da se iskanje nadaljuje v globino. Med generiranjem program uporablja operande oz. registre, ki so bili podani na vhodu ali generirani zaradi prejšnjih inštrukcij. Če prenosni bit ni nastavljen, potem instrukcije, ki uporabljajo ta bit, ne bodo generirani. Na začektu iskanja prenosni bit ni definiran in dolžina zaporedja ukazov je enaka nič. Pri vsaki rekurziji program pokliče funkcijo \texttt{synth}, ki poišče list vseh definiranih ukazov in doda zaporedju en ukaz. Ker različne arhitekture zahtevajo različno število operandov, program mora imeti funkcije, ki bodo to dejstvo upoštevali. V tem primeru so težavo rešili z različnimi \texttt{synth} funkcijami, katerih lahko dostopajo le določene naprave. Pri tem je še treba poudariti, da se ukaz, ki preneša vrednost iz enega registra v drugi register, ne generira pri napravah, ki imajo 3-operandne ukaze, saj ukaz ni optimalen. Pri vsakem generiranem zaporedju program preveri njegovo delovanje na naključno izbranimi vrednosti, in če se rezultati ujemajo, potem nadaljuje z bolj obširnim preverjanjem. Če zaporedje ukazov opravi test, potem ga izpiše. Pri tem je zelo majhna verjetnost, da program izpiše tudi neekvivalentno kodo. Za pospešitev delovanja, optimizator uporablja manjhno število konstant v zaporedju (Npr. -1, 0, 1, \(2^{31}-1\) in \(2^{31}\)). Posledica take omejitve, je povečana možnost, da optimizator zgreši optimizirano kodo. Kar je še treba poudariti, da kodo, ki jo program generira ne izvaja, na procesorju temveč jo z raznimi \texttt{PERFORM} metodami, dodeljen za vsak ukaz, simulira. Poleg osnovnega algoritma, obstjajo še nekatere predelane verzije, ki jih GSO v tem dokumentu nima implementiranih. Prva izmed idej je, da bi poleg uporabe testnih primerov, uporabili preverjanje z binarnim diagramov odločanja \cite{pdf6}. Idea takega iskanja ekvivalence je, da vsak bit v registru predstavlja boolean spremenljivko in vsaka operacija predstavlja odvisnost med biti pri izvedbi enega ukaza. Rezultat take predstavitve je graf, kjer vozlišče predstavlja boolean spremenljivko. Problem takega alogoritma se pojavi v predstavitvi bolj kompleksnih funkcij, kot so množenje in deljenje, saj je posledica tega zelo velik graf in posledično tudi program potrebuje zelo veliko časa za dokazovanje ekvivalence. Druga ideje združuje poglavje o optimizaciji večvejitvenih poteh (Npr. \texttt{switch} stavki) in GSO. Dokument \cite{branch} opisuje kako naj bi optimizirali več vejitveno kodo z predelano verzijo superoptimizatorja. Superoptimizator naj bi vseboval predelano binarno drevo, ki prestavljalo vejitev skokov na določeno kodo. Vsaka točka v drevesu predstalja število ali operacijo in vsaka poveza bi predstavljal pot izpolnjenega ali neizponjega pogoja. Koren drevesa se vedno začne s številom in ima povezavo do primerjalnega operatorja. Primerjalni operator potem to število uporabi za primerjanje vrednosti. V drevesu je možno, da sta na poti po drevesu navzdol zaporedno povezana dva primerjalna operatorja. V tem primeru bi algoritem vzel zadnjo prebrano vrednost na poti. Po končani optimizaciji bi optimizator nadaljeval z oprimizacijo vsake veje posebej. Še ena bolj zanimiva verzija je uporaba kombinacije superoptimizatorja in podatkovne baze \cite{super}. Idea je, da program le avtomatično generira pravila, ter jih zapiše v podatkovno bazo, baza pa je kaseneje uporabjena za podporo prevajalniku pri optimizaciji kode. Optimizatorju je podan testni program, iz katerega vleče kodo, za optimizacijo. Vsaka izvlečena koda se izvede na testni napravi. Na koncu izvajanja, program zabeleži vse žive registre in stanje naprave. Za to stanje izračuna hash vrednost, ter jo s temu primernim zaporedjem ukazov v tabelo vstavi. Med izvajanjem tega algoritma, optimizator izvaja podoben algoritem kot pri GSO, ter generirano kodo izvede. Izvajanje poteka na dveh fiksnih stanji naprave. Za vsako generirano kodo, program poišče v tablei, če je v njej že shranjena izračunana hash vrednonst. V primeru najdene take vrednosti, optimizator preveri ekvivalenco in jo v primeru dokazane ekvivalence zapiše v podatkovno bazo. Če ne najde enake vrednosti, potem jo zavrže. Enako kot pri originalni različici, je tudi tu pri generiranju kode uporabljena omejena količina operacijskih kod. Poleg tega je potrebno vsako zaporedje posplošiti, saj bi bila količina primerov prevelika. Postopek posploševanja je relativno enostavno. Za vsak register in konstanto priredimo novo ime. Pri tem velja pravilo, da preimenujemo spremenljivke v zaporedju, kot jih koda izvaja. Pri tem algoritmu je še ena omejitev, vsaka izvlečena kone ne sme vsebovati točko vstopa v segment kode, kjer skok izvira iz segmenta. Poleg tega generirana kode ima le en skok izven segment. Pri je še dodatno omejena na največ 4 različne registre. 
 		\section{Primeri optimizacije}
 	\label{priG}
 	Tukaj je nekaj delov programa, ki jih je optimizator optimiziral in njihov pripadajoči optimiziran program. Vsi deli so majhni, saj optimizator porabi preprosto preveč časa z večje dele programa. Pri tem boste opazili, da je za primer podanih več funkcij ki pa imajo enako funkcijonalnost. Za prvi primer si lahko vzamemo del kode, ki izračuna absolutno vrednost podanega števila.
@@ -700,7 +698,8 @@ addl    $4,%eax
 \end{Verbatim}
 	\section{Prednosti in slabosti}
 	Vsak optimizator ima svoje prednosti in slabosti in GNU-Superoptimizer ni nobena izjema. Toda pri tem optimizatorju je več slabosti kot prednosti. Največja prednost tega optimizatorja je, da vedno najde optimalen program, če upoštevamo nabor ukazov, ki jih lahko izpiše. Optimizator je tako osnovan, da lahko dodajamo nabor ukazov za druge vrste arhitekture. Program je tudi dovolj stabilen za uporabo in ga je enostavno namestiti. Prednost je tudi v tem, da najdeni programi ponavadi ne vsebujejo pogojne skoke, ki upočasnjujejo program. Tukaj pa se prednosti končajo. Največja slabost takega optimizatorja je časovna zahtevnost. Časovna zahtevnost takega programa je O(\(m*n^{2n}\)), kjer m predstavlja število ukazov in n je najmanjša dolžina, ki predstavlja ciljno funkcijo. Optimizator zna uporabljat le podan nabor operacij \cite{pdf5}, poleg tega pa ni fleksibilen, če se v originalni kodi pojavijo konstante, ki jih optimizator ne podpira pri iskanju. (Primer je omenjen v točki \ref{priG}).
-	\chapter{STOKE \cite{sup2}}
+	\chapter{STOKE}
+	\label{ch3}
 	Leta 2013 so razvili stohastičen superoptimizator. Stohastičen optimizator uporablja brez zančni superoptimizacijsko nalogo kot stohastični problem iskanja. Konkurenčne omejitve od preoblikovanja pravilnosti in izboljševanja delovanja so kodirani kot izrazi v odvisnosti stroškov, ter Markov Chain Monte Carlo vzorčevanje se uporablja za hitro raziskovanje prostora vseh možnih programov, da najde tisti program, ki je optimizacija danega ciljnega programa. Čeprav njihova metoda žrtvuje popolnosti, obseg programov, programe ki jih sposoben preučiti in kakovost programov, ki jih posledično proizvaja, daleč presegajo tiste proizvedene od obstoječih superoptimizatorjev. Že binarne datotek, prevedene z  llvm -O0 izbranim za 64-bitne x86, njihova izvedba prototipa, STOKE, je sposobna proizvajati programe, ki bodisi so enako dobre ali prekašajo kodo, ki jih generira gcc -O3, icc -O3, in v nekaterih primerih tudi strokovno lastnoročno napisano kodo \cite{article1,article5}.
 	\section{Opis programa in načina delovanja}
 	\label{lab1}
@@ -716,7 +715,7 @@ addl    $4,%eax
 	 \exists{a,b} \in \mathbb{N}, \forall \sigma  ,m_t = a*m_r + b 
 	 \label{eq:2}
 	 \end{equation}
-	 Za vse točke mora veljati izraz \ref{eq:2}, kjer sta $a$ in $b$ konstanti, $\sigma$ podanp stanje naprave, $m_t$ ozančuje koliko krat gre izvajanje skozi točko v izvirnem programu in $m_r$ ozančuje koliko krat gre izvajanje skozi točko v dobljenem programu. Program tudi zavrne točke, kje število lokacij v pomnilniku ni konstanten. Preostale točke izbira glede na razlike v stanju naprave, od najmanjše do največje. Izbiranje poteka, dokler ne dobimo brezzančne segmente kode. Nazadnje odstrani vse točke, kjer segmenti še vedno ostanejo brezzančni. Recimo da imamo originalen program $T$ in program skuša preveriti ekvivalenco programa $R$. Program najprej naredi kočke rezanja \texttt{a}, \texttt{b} in \texttt{c}. Te toćke označujejo segmente od \texttt{a} do \texttt{b} (rez kode v zanki), od prvega ukaza v zanki, do \texttt{b} in od \texttt{b} do \texttt{c}. S pomočjo take razdelitve lahko optimizator induktivno dokaže, da je dobljen program ekvivalenten izvirnemu. Pri dokazovanju ekvivalence morajo veljati naslednja dejstva. Na žačetku kode oz. v točki \texttt{a} mora biti za obe programski kodi stanje naprave enako. Pri tem še mora veljati, da je končna vrednost v registru za vračanje vrednoti (V tem primeru \texttt{eax}) enaka. Program še mora določiti relacijo I med elementi med stanji naprave. Ko je relacija določena, žačne preverjati. Najprej preveri če se tranzicija iz \texttt{a} do \texttt{c} z enakim stanjem naprave konča z enako vrnjeno verdnostjo. Potem preveri če pri tranziciji iz \texttt{a} do \texttt{b} obvelja relacija I. Kasneje preveri trazicijo od \texttt{b} do \texttt{b}, če relacija še vedno velja. Na koncu preveri če tranzicija med \texttt{b} in \texttt{c}, ki zadovoljuje relacijo I in vrne enako končno vrednost \cite{sto}. Optimizator opravi preverjanje z izvajanjem ukazov, ki so dodeljeni vsaki tranziciji.
+	 Za vse točke mora veljati izraz \ref{eq:2}, kjer sta $a$ in $b$ konstanti, $\sigma$ podanp stanje naprave, $m_t$ ozančuje koliko krat gre izvajanje skozi točko v izvirnem programu in $m_r$ ozančuje koliko krat gre izvajanje skozi točko v dobljenem programu. Program tudi zavrne točke, kje število lokacij v pomnilniku ni konstanten. Preostale točke izbira glede na razlike v stanju naprave, od najmanjše do največje. Izbiranje poteka, dokler ne dobimo brezzančne segmente kode. Nazadnje odstrani vse točke, kjer segmenti še vedno ostanejo brezzančni. Recimo da imamo originalen program $T$ in program skuša preveriti ekvivalenco programa $R$. Program najprej naredi kočke rezanja \texttt{a}, \texttt{b} in \texttt{c}. Te toćke označujejo segmente od \texttt{a} do \texttt{b} (rez kode v zanki), od prvega ukaza v zanki, do \texttt{b} in od \texttt{b} do \texttt{c}. S pomočjo take razdelitve lahko optimizator induktivno dokaže, da je dobljen program ekvivalenten izvirnemu. Pri dokazovanju ekvivalence morajo veljati naslednja dejstva. Na žačetku kode oz. v točki \texttt{a} mora biti za obe programski kodi stanje naprave enako. Pri tem še mora veljati, da je končna vrednost v registru za vračanje vrednoti (V tem primeru \texttt{eax}) enaka. Program še mora določiti relacijo I med elementi med stanji naprave. Ko je relacija določena, žačne preverjati. Optimizator opravi preverjanje z izvajanjem ukazov, ki so dodeljeni vsaki tranziciji.
 	
 	\begin{figure}[htb]
 		\begin{center}
@@ -726,7 +725,7 @@ addl    $4,%eax
 		\label{pic1}
 	\end{figure}
 	
-	V primeru programa na sliki \ref{pic1} sekvenci \texttt{i} in \texttt{ii} pripadata tranziciji iz \texttt{a} v \texttt{b}, sekvenca \texttt{iii} pripada tranziciji iz \texttt{a} v \texttt{c}, sekvenci \texttt{iv} in \texttt{v} pripadata tranziciji iz \texttt{b} v \texttt{b} in sekvenca \texttt{vi} pripada tranziciji iz \texttt{b} v \texttt{c}. Problem, ki se pojavi med izvajanjem je, kakšne invarjante mora točka \texttt{b} imeti, da bi statistično dokazal, da izvajanje zaporedja $R$ sledi izvajanju ustreznemu zaporedju programa $T$ in da izvajanje obeh programov gre skozi enake koščke. Rešitev takega problema se najbe v analizi podatkov. Program indentificira pot z ujemanjem sledi obeh zank na enakem vhodu podatkov na množici točk rezanj. Za pogoje relacije pri točki \texttt{b} lahko program preveri vrednosti živih registrov dobljene pri izvajanju obeh programov. Pri tem pridobi matrico, v kateri prva vrstica vsebuje vrednosti registrov, ko prvič doseže točko \texttt{b} in druga vrstica vsebuje vrednosti, ko drugič doseže točko \texttt{b}. Iz tega lahko izvleče relacijo med vrednosti s pomočjo linearne algebre tako, da izračuna ničelni prostor matrice s pomočjo knjižnice Integer Matrix Library. Tak algoritem predpostavlja, da koda vsebuje le eno zanko, vendar je to možno trivialno razširiti na primere z več zank in z notranjimi zankami tako, da za vsak kos kode ponovno izvedemo rezanje. V algoritmu je tudo možno razširiti monžico invarjant, tako da določimo največjo stopnjo monoma in dodamo vse monome, ki so manjše od the stopnje. Ker lahko ne-linearen invarianta predstalja disjunkcijo linearnih enkakovrednosti, je lahko tudi v množici invarjant vsebovana tudi določeno število disjunktivnih izrazov enakovrednosti. Disjuktni izraze rešuje z že obstoječim algoritmom Z3 \cite{article3}. Pri računanju živih registrov DDEC upošteva, da na 64 bitnih x86 arhitekturah za nekatere registre obstaja množica imenov. Vsako ima naslavja en del registra (Npr. prvih 8, 16, 32 bitov). Kadar ukaz zahteva pisannje v en del reistra, program označi cel rigister kot živega. Da lahko program opazuje vrednosti živih registrov pri točkah rezanja, se zanaša na sposobnost opazovanja ciljne lokacje in dinamično spreminjanje vrednosti s pomočjo zbirnika JIT. Pred izvajanjem optimizacije, DDEC rezervira del pomnilnika. Pri izvajanju vsakega ukaza optimizator pošlje signal za klic funkcije \texttt{record()}, ki shrani stanje naprave in vrednosti, ki so bile prebrane ali napisane v pomnilniku. Ko se izvajanje ciljne funkcije konča, tabela sledov vsebuje vse zapise manipulacije vrednosti na registrih in pomnilniku. Problem lahko nastane, da nekateri kandidati za ponovn zapis lahko kažejo na neveljano lokacijo v pomnilniku. Rešitev je se skriva v funkciji \texttt{sandbox()}. Pri izvajanju programa program pridobi največje velikost alociranih podatkov v pomnilniku in minimalen in maksimalen naslov v pomnilniku. Pridobljene vrednosti uporabi za rezervacijo drugega dela pomnilnika, da zavaruje izvajanje optimiziranega programa. Velikost podatkov rezervirenega pomnilnika ne presega velikosti rezerviranega izvirnega programa. Kazalci na pomnilniško mesto so zavarovano z funkcijo \texttt{sandbox\_addr()}, ki poskrbi da dostop do pomnilnika znotraj meja in blokira vse vstale dostope in ob primeru blokade ustavi izvajanje. Če je potrebno, lahko delež rezerviranega pominilnika povečamo. Poleg tega se optimizator zavaruje pred nastalimi neskončnimi zankami s klicom \texttt{sandbox\_jump}, ki prešteje kolikokrat je program skočil nazaj in prekine izvajanje, če preseže maksimalno število skokov nazaj. Program mora še poskrbeti, da se konča z ukazov za vrnitev na mesto izvajanje pred klicem, le če so invarjante izpolnjene. Za to poskrbi funkcija \texttt{sanbox\_return()}. Zaradi strukture in načina delovanja, algoritem dopušča uporabo še za reševanje drugih težav (Npr. avtomatično učenje množice ukazov glede na podano osnovno množico \cite{article4}).%
+	V primeru programa na sliki \ref{pic1} sekvenci \texttt{i} in \texttt{ii} pripadata tranziciji iz \texttt{a} v \texttt{b}, sekvenca \texttt{iii} pripada tranziciji iz \texttt{a} v \texttt{c}, sekvenci \texttt{iv} in \texttt{v} pripadata tranziciji iz \texttt{b} v \texttt{b} in sekvenca \texttt{vi} pripada tranziciji iz \texttt{b} v \texttt{c}. Problem, ki se pojavi med izvajanjem je, kakšne invarjante mora točka \texttt{b} imeti, da bi statistično dokazal, da izvajanje zaporedja $R$ sledi izvajanju ustreznemu zaporedju programa $T$ in da izvajanje obeh programov gre skozi enake koščke. Rešitev takega problema se najbe v analizi podatkov. Program indentificira pot z ujemanjem sledi obeh zank na enakem vhodu podatkov na množici točk rezanj. Za pogoje relacije pri točki \texttt{b} lahko program preveri vrednosti živih registrov dobljene pri izvajanju obeh programov. Pri tem pridobi matrico, v kateri prva vrstica vsebuje vrednosti registrov, ko prvič doseže točko \texttt{b} in druga vrstica vsebuje vrednosti, ko drugič doseže točko \texttt{b}. Iz tega lahko izvleče relacijo med vrednosti s pomočjo linearne algebre tako, da izračuna ničelni prostor matrice s pomočjo knjižnice Integer Matrix Library. Tak algoritem predpostavlja, da koda vsebuje le eno zanko, vendar je to možno trivialno razširiti na primere z več zank in z notranjimi zankami tako, da za vsak kos kode ponovno izvedemo rezanje. V algoritmu je tudo možno razširiti monžico invarjant, tako da določimo največjo stopnjo monoma in dodamo vse monome, ki so manjše od the stopnje. Ker lahko ne-linearen invarianta predstalja disjunkcijo linearnih enkakovrednosti, je lahko tudi v množici invarjant vsebovana tudi določeno število disjunktivnih izrazov enakovrednosti. Disjuktni izraze rešuje z že obstoječim algoritmom Z3. Z3 intergrira moderno metodo, ki temelji na DPLL SAT reševalec, jederni teoretski reševalec, ki se ukvarja z enakovrednostmi in neinterpretiranimi funkcijami, satelitskimi reševalci (za aritmetiko, tabelo, etc.), in E-ujemanjem abstraktnih strojev (za kvantifikatorje) \cite{article3}. Pri računanju živih registrov DDEC upošteva, da na 64 bitnih x86 arhitekturah za nekatere registre obstaja množica imenov. Vsako ima naslavja en del registra (Npr. prvih 8, 16, 32 bitov). Kadar ukaz zahteva pisannje v en del reistra, program označi cel rigister kot živega. Da lahko program opazuje vrednosti živih registrov pri točkah rezanja, se zanaša na sposobnost opazovanja ciljne lokacje in dinamično spreminjanje vrednosti s pomočjo zbirnika JIT. Pred izvajanjem optimizacije, DDEC rezervira del pomnilnika. Pri izvajanju vsakega ukaza optimizator pošlje signal za klic funkcije \texttt{record()}, ki shrani stanje naprave in vrednosti, ki so bile prebrane ali napisane v pomnilniku. Ko se izvajanje ciljne funkcije konča, tabela sledov vsebuje vse zapise manipulacije vrednosti na registrih in pomnilniku. Problem lahko nastane, da nekateri kandidati za ponovn zapis lahko kažejo na neveljano lokacijo v pomnilniku. Rešitev je se skriva v funkciji \texttt{sandbox()}. Pri izvajanju programa program pridobi največje velikost alociranih podatkov v pomnilniku in minimalen in maksimalen naslov v pomnilniku. Pridobljene vrednosti uporabi za rezervacijo drugega dela pomnilnika, da zavaruje izvajanje optimiziranega programa. Velikost podatkov rezervirenega pomnilnika ne presega velikosti rezerviranega izvirnega programa. Kazalci na pomnilniško mesto so zavarovano z funkcijo \texttt{sandbox\_addr()}, ki poskrbi da dostop do pomnilnika znotraj meja in blokira vse vstale dostope in ob primeru blokade ustavi izvajanje. Če je potrebno, lahko delež rezerviranega pominilnika povečamo. Poleg tega se optimizator zavaruje pred nastalimi neskončnimi zankami s klicom \texttt{sandbox\_jump}, ki prešteje kolikokrat je program skočil nazaj in prekine izvajanje, če preseže maksimalno število skokov nazaj. Program mora še poskrbeti, da se konča z ukazov za vrnitev na mesto izvajanje pred klicem, le če so invarjante izpolnjene. Za to poskrbi funkcija \texttt{sanbox\_return()}. Algoritem v STOKE optimizatorju je posledično lahko reševal tudi druge probleme. Primer takega je avtomatično učenje ukazov. Ideja takega algoritma je, da je programu podan osnovni nabor ukazov, program pa bi moral iz osnovnih ukazov sestaviti zaporedje ukazov, ki je funkcijonalno enaka bolj kompleksnemu ukazu \cite{article4}.%
 	%
 		\begin{figure}[htb]
 			\begin{center}
@@ -746,7 +745,7 @@ addl    $4,%eax
 		\label{pic2}
 	\end{figure}
 	%
-	STOKE ima plementiran algoritem za optimizacijo računanja s števili s plavajočo vejico. Kot je v ploglavju \ref{fl} omenjeno, optimizacija števil s plavojočo vejico ni preprosta, saj je v registrih in pomnilnikih shranjena zaokrožena vrednost, ki je najbližji napisani vrednosti v izvirni kodi. Še bolj se dejstvo zakomplicira, ko upoštevamo, da se med vsako operacijo število zaokrožuje \cite{float2}. Zato je v optimizatorju implementiran algoritem, ki preverja odstopanje med izvirnim in dobljenim programom. Pri računanju odstopanja pa se pojavi problem. Najbolj razširjena načina za računanje odstopa, sta relativna in absolutna razlika. Absolutno razliko dobimo tako, da iz dobljene vrenosti odštejemo prvotno vrednost. Če pa abolutno razliko delimo z prvotno vrednostjo, dobimo relativno vrednost. Oba načina imata problem pri računanju odstopanja. Absolutna razlika se v večjimi števili povečuje, Relativna vrednost, pa se povečuje pri denomlaliziranih številih. Tak problem se še bolj povečuje z računanjem ne-sosednjih števil. Zato je za izračun odstopanja uporabljen algoritem negotovost v zadnjem mestu (uncertainty in the last place), ki izmeri razliko med realnim številom in najbližjim predstavljen številu s plavojoćčo vejico v registru. V tem primeru STOKE računa razliko med stare in nove vrednosti v registru v ciljnem programu. Prednost take funkcije je, da lahko razliko izračuna tudi, če je kot argment podan noskončno ali nedefinirano število. ULP v C-ju potrebuje dva argumenta tipa \texttt{double}. Funkcija najprej predefinira ragumente, tako da vrednost shranjena v spremenljivki prebere kot celoštevilsko vrednost in vrne absolutno razliko med argumentoma. Pri tem še popravi porazdelitev števila s plavajočo vejico od minus neskončno do 0 tako da od celoštevilske vrednosti odšteje minimalno možno vrednost, ki jo lahko celoštevilska vrednost zavzeme, saj prvotno bi najmanjša vrednost predstavljala negativno ničlo in 0 bi prestavljala negativno nedefinirano število. Skupno odstopanje med izvirnim in dobljenim programom izračuna tako, da vzeme maksimalno odstopanje enega podatka, saj s tem prepreči možnost preliva pri seštevanju takih števil. STOKE sprejme končen program v primeru, če ne odstopa za več kot \(n\), ki je določena s strani uporabnika.
+	STOKE ima plementiran algoritem za optimizacijo računanja s števili s plavajočo vejico. Kot je v ploglavju \ref{fl} omenjeno, optimizacija števil s plavojočo vejico ni preprosta, saj je v registrih in pomnilnikih shranjena zaokrožena vrednost, ki je najbližji napisani vrednosti v izvirni kodi. Še bolj se dejstvo zakomplicira, ko upoštevamo, da se med vsako operacijo število zaokrožuje \cite{float2}. Zato je v optimizatorju implementiran algoritem, ki preverja odstopanje med izvirnim in dobljenim programom. Pri računanju odstopanja pa se pojavi problem. Najbolj razširjena načina za računanje odstopa, sta relativna in absolutna razlika. Absolutno razliko dobimo tako, da iz dobljene vrenosti odštejemo prvotno vrednost. Če pa abolutno razliko delimo z prvotno vrednostjo, dobimo relativno vrednost. Oba načina imata problem pri računanju odstopanja. Absolutna razlika se v večjimi števili povečuje, Relativna vrednost, pa se povečuje pri denomlaliziranih številih. Tak problem se še bolj povečuje z računanjem ne-sosednjih števil. Zato je za izračun odstopanja uporabljen algoritem negotovost v zadnjem mestu (uncertainty in the last place), ki izmeri razliko med realnim številom in najbližjim predstavljen številu s plavojoćčo vejico v registru. V tem primeru STOKE računa razliko med stare in nove vrednosti v registru v ciljnem programu. Prednost take funkcije je, da lahko razliko izračuna tudi, če je kot argment podan noskončno ali nedefinirano število. ULP v C-ju potrebuje dva argumenta tipa \texttt{double}. Funkcija najprej predefinira ragumente, tako da shranjeno vrednost v spremenljivki prebere kot celoštevilsko vrednost in vrne absolutno razliko med argumentoma. Pri tem še popravi porazdelitev števila s plavajočo vejico od minus neskončno do 0 tako da od celoštevilske vrednosti odšteje najmanjše predznačeno število, ki jo lahko celoštevilska vrednost zavzeme, saj prvotno bi najmanjša vrednost predstavljala negativno ničlo in 0 bi prestavljala negativno nedefinirano število. Skupno odstopanje med izvirnim in dobljenim programom izračuna tako, da vzeme maksimalno odstopanje enega podatka, saj s tem prepreči možnost preliva pri seštevanju takih števil. STOKE sprejme končen program v primeru, če ne odstopa za več kot \(n\), ki je določena s strani uporabnika.
 	
 	\subsection{Zagon}
 	\label{zg1}
@@ -1301,20 +1300,149 @@ V tem poglavju so rezultati optimizacij daljših in bolj kompleksnih programov. 
 
 Kot vsi optimizatorji ima tudi ta optimizator nekaj prednosti in slabosti. Prva prednost takega optimizatorja je, da lahko uporablja bolj kompleksne ukaze (npr. \texttt{popcnt}). Druga prednost je način iskanja optimizacija nekega programa. Optimizator ima veliko različnih konfiguracij in načinov iskanja. Uporabnik lahko izbira med gradnjo kode ali optimizacijo prejšnje kode, strategijo načina iskanja. Dodatna vrednost je še v tem, da ima optimizator ločene dele programov, ki lahko spreminjamo in dodajamo ne da bi ogrozili ostale module. Slaba stvar takega optimizatorja je, da uporabnik so mora spoznati na arhitekturo procesorja in na zbirno kodo, ki ga ta procesor uporablja. Pri tem še mora vedeti, kako nastaviti konfiguracijo za iskanje, kar je za preprostega uporabnika preprosto preveč. Poleg tega je še potrben človeški vnos skozi cel postopek optimiziranja. Najšlabše dejstvo pa je, da ta optimizator ni stabilen, saj potrebuje točno določen prevajalnik, točno določen operacijski sistem in ima še vedno težave pri prevajanju in zagonu optimizatorja. Superoptimizator je bolj uporaben za optimizacijo manjših funkcij v programu, saj lahko za celo vsebino funkcije zamenja z enim samim ukazom. Po vsaki optimizaciji moramo preveriti, če program deluje pravilno.
 
-\chapter{GNU Compiler Collection}
-\label{ch3}
-GCC je napisal Richard Matthew Stallman leta 1987 kot prevajalnik za projekt GNU, tako da bi bil na voljo kot prosto programje. Njegov razvoj je večinoma vodila Free Software Foundation. Skupina razvijalcev, ki je bila nezadovoljna s počasnim napredovanjem in zaprto naravo uradnega razvoja GCC, je leta 1997 razvila projekt z imenom EGCS (Experimental/Enhanced GNU Compiler System). S projektom so povezali več preskusnih odcepljenih programih v posamezen projekt, izvirajoč iz GCC. Razvoj EGCS se je kasneje pokazal za precej bolj življenjskega od razvoja GCC, tako da so aprila 1999 končno določili kot uradno različico GCC. Sedaj GCC vzdržuje več skupin programerjev iz celega sveta. Prenesli so ga na več različnih vrst procesorjev in operacijskih sistemov kot kateri drugi prevajalnik. GCC velikokrat izberejo za razvoj programske opreme, ki se bo izvajala na različni strojni opremi. Razlike domačinskih prevajalnikov vodijo do težav v razvijajoči programski kodi, ki se naj bi pravilno prevedla na vseh prevajalnikih in v izdelanih skriptah, ki bodo tekle na vseh platformah. Z uporabo GCC je enak razčlenjevalni program za vse platforme, in če se koda prevede na enem sistemu, je večja verjetnost, da se bo prevedla tudi na drugem. V nekaterih primerih GCC naredi počasnejše izvršne programe kot drugi prevajalniki, vendar se ga zaradi prostosti in možnih manjših razvojnih stroškov splača uporabiti.
+\chapter{Lastna implementacija}
+\label{ch4}
+Poleg obstoječih programov, je bil še narejena lastnen poskus implementacije superoptimizarotja. Ta optimizator se razlikuje od prejšnjih optimizatorjev, omenjenih V poglavju \ref{ch2} in \ref{ch3}. Kot prvo, program je napisan v programskem jeziku Java. Kot drugo, program uporablja drugačen zbirni jezik. Omenjana optimizatorja sta uporabljala zbirni jezik za Intelov procesor, lastna implementacija pa uporablja MMIX zbirni jezik. Ta zbirni jezik je uporabljen, ker je bolj enostaven jezik in za ta jezik lažje implementirati kot Intelov. Programski jezik Java je bil uporabljen, ker podpira objektno programiranje in dedovanje. Poleg tega je bil še uporabjen pomožni program NetBeans.
+
 \section{Opis programa in načina delovanja}
-\label{loi}
-Kot že omenjeno v poglavju \ref{ch3} GCC je prevajalk, vzdrževan prek več skupin programerjev. Prevajalnik je preprost za uporabo. Zaženemo ga lahko le z enim samim ukazom v ukazni vrstici. Prevajanik privzeto ne optimizira kode, vendar ima nastavitve, ki lahko omogočijo določene optimizacije. Omogočimo jih lahko tako, da dodamo zastavice in glede na zastavice, ki smo jih dali, potem program med prevajanjem optimizira. Ko končanem prevajanju, program preprosto izpiše preveden program v datoteko, ki jo lahko poženemo kasneje. Ker je prevajalnik namenjen za širšo publiko, je tudi optimizator, pakiran z prevajalnikom, odprt širši publiki. 
+\label{prev4}
+Kot je že v točki \ref{ch4} omenjeno, optimizator je napisan v programskem jeziku Java. Če želimo tak program uporabiti ga moramo najprej prevesti z Java prevajalnikom. Ker je bil poleg prevajalnika uporabljen še pomožni program, ga je lažje prevesti. Programu je podan kot vhod ime besedilne datoteke. V Datoteki so napisani ukazi v MMIX zbirnem jeziku. Program ga potem prebere in shrani zaporedje ukazov v spremenljivko razreda oz. \texttt{class} \texttt{Code}. Vsak ukaz je shranjen v spremenljivki razreda \texttt{Instruction}. Razred {Instrucktions} vesebuje spremenljivke za shranjevanje operandov v ukazov. Ti operandi so razdeljeni v tobelo vhodnih operandov in tabelo izhodnih operandov. Poleg tega je so še definirane tabela vhodnih in tabela izhodnih posebnih registrov, s katerimmi določena operacijska koda manipulira (Npr. \texttt{MULU} uporablja kot dodaten izhod posebni register \texttt{rH}). Pri branju programa optimizator naprej določi operacijsko kodo, potem določi kakšnega tipa so operandi in potem poskuša najti ujemanje v podani množici naborov ukazov v \texttt{if} stavku. Za dodajanje novega tipa ukaza je potrebno spremeniti v \texttt{if} ali \texttt{else if} pogoj, ali stavku dodati nov \texttt{else if} stavek za že obsteječo operacijsko kodo ali pa dodati nov \texttt{case}, če dodajamo ukaz z novo operacijsko kodo.
+
+\medskip
+		
+\noindent
+{\it \texttt{if} primer:}
+		\begin{Verbatim}[baselinestretch=1]
+		
+if(opCode.equals(Constants.opCodes.ADD.toString())){
+    if(operands.length == 3){
+	    if(operands[0] instanceof Register && 
+	    operands[1] instanceof Register && 
+	    (operands[2] instanceof Register ||
+	     operands[2] instanceof OpByte)){
+            Operand[] in = {operands[1],operands[2]};
+            Operand[] out = {operands[0]};
+            Operand[] sIn = {};
+            Operand[] sOut = {getOperand("rA")};
+            list.add(
+             new Instruction(label,Constants.opCodes.ADD,in,out,sIn,sOut)
+            );
+        }
+        else{
+            System.out.println("Wrong operands in: "+line); 
+            System.exit(1);
+        }
+    }
+    else{
+        System.out.println("Wrong operands in: "+line);
+        System.exit(1);
+    }
+}
+else if(opCode.equals(Constants.opCodes.SUB.toString())){
+    if(operands.length == 3){
+        if(operands[0] instanceof Register &&
+         operands[1] instanceof Register && 
+         (operands[2] instanceof Register ||
+          operands[2] instanceof OpByte)){
+            Operand[] in = {operands[1],operands[2]};
+            Operand[] out = {operands[0]};
+            Operand[] sIn = {};
+            Operand[] sOut = {getOperand("rA")};
+            list.add(
+             new Instruction(label,Constants.opCodes.SUB,in,out,sIn,sOut)
+            );
+        }
+        else{
+            System.out.println("Wrong operands in: "+line); 
+            System.exit(1);
+        }
+    }
+    else{
+        System.out.println("Wrong operands in: "+line);
+        System.exit(1);
+    }
+}
+		\end{Verbatim}
+		%
+\noindent
+{\small (Primer kode se najde v datoteki MMIXOptimizator.java (vrstice 234-263). V vsakem pogojnem stavku se preveri, če je ukaz pravilne oblike. Naprej se preveri če operacijska koda obstaja, potem če je dovolj operandov za ta ukaz in potem se preveri če je vsak opreand pravilnega tipa.)}
+
+Če dodajamo novo operacijsko kodo, je potem še potrebmo dodati nov znak, ki predstavlja novo operacijsko kodo, v \texttt{enum} spremenljivko \texttt{opCodes}. Oprimizator vsebuje skupno metodo \texttt{change} za spreminjanje kode.V tej metodi je več kot 70 različnih metod za spreminjanje kode. Pri dodajanju novega vzorca je potrebno napisat novo metodo, To metodo je ptem potrebno vstaviti v metodo \texttt{change}.
+
+
+\medskip
+
+\noindent
+{\it Primer skupne metode:}
+\begin{Verbatim}[baselinestretch=1]
+
+private static void change(TreeSet<Code> codeList){
+	Code org = new Code(codeList.first().list);
+	found.add(org);
+	refreshLive(org);
+	codeList.pollFirst();
+
+	//metode spreminjanja kode
+	deleteDead(org);
+	changeMulToShift(org);
+	changeShiftToMul(org);
+	doublePlusU(org);
+	doubleMinus(org);
+	doubleMinusU(org);
+	plusMinusU(org);
+}
+\end{Verbatim}
+%
+\noindent
+{\small (Primer kode se najde v datoteki MMIXOptimizator.java. Metoda se nahaja v 2917. vrstici in je skrajšana za ta primer.)}
+
+
+\subsection{Zagon}
+
+Kot je že omenjeno v poglavju \ref{prev4}, program je potrebno prevesti, ter ga potem pognati. Prevajalnik se zažene s pomočjo ukazne vrstice. Ukaz je enostaven in ne potrebuje nobenih zastavic. Preveden program potem poženemo z ukazno vrstico. Pri tem moramo podati kot argument imena datotek, ki jih želimo optimizirati.
+
+\medskip
+	
+\noindent
+{\it Format ukaza za prevoda programa}
+\begin{Verbatim}[baselinestretch=1]
+	javac <datoteka>
+\end{Verbatim}
+
+\medskip
+
+\noindent
+{\it Format ukaza za zagon programa}
+\begin{Verbatim}[baselinestretch=1]
+java <datoteka_brez_končnice> <prva_datoteka> <druga_datoteka> <tretja_datoteka...>
+\end{Verbatim}
+
+\medskip
+
+\noindent
+{\it Primer ukaza za prevoda programa}
+\begin{Verbatim}[baselinestretch=1]
+javac MMIXOptimizator.java
+\end{Verbatim}
+
+\medskip
+
+\noindent
+{\it Format ukaza za zagon programa}
+\begin{Verbatim}[baselinestretch=1]
+java MMIXOptimizator test1.txt test2.txt
+\end{Verbatim}
+
+Ker je optimizator narejen s pomočjo NetBeans programa, lahko NetBeans uporabimo kot alternitivo za zagon programa. Pomožni program poskrbi za avtomatsko prevajanje in zogon, in je uporabniku bolj prijazen.  
+
 \subsection{Način optimiziranja}
-Kot je že omenjeno v poglavju \ref{loi}, GCC mora imeti podane zastavice, ki povedo katere optimizacije naj opravi za določen program \cite{gcc}. Čas prevajanja je odvisen od omogočenih optimizacij. Poleg zamenjav funkcijonalnih enakih kod, optimizator omogoča vstavljanje generirane kode funkcije namesto klica funkcije in eliminacijo if stavkov in zank, katerih pogoj ni nikoli izpolnjen (ali je vedno izpolnjen pri if stavku).   
+
+MMIX superoptimizator optimizira glede na podan nabor vzorcev. Ti vzorci so opisani v obliki metode. Vsaka metoda je potem uporabljena v skupni metodi \texttt{change}. To omogoči, da je vsaka transformacija funkcijonalno enaka. Pri iskanju po prostoru se uporablja mešanica iskanja po širini in globini. Program najprej išče najbolj optimalno optimizacijo po širini in shrani vsako najdeno kombinacijo v tabelo. Potem iz tabele vzame najkrajšo najdeno kodo in na njej pononvo naredi vse transformaije, ter vse transformacije shrani nazaj v tabelo. Program konča ko nima več nobene kode za tranformirat. Tukaj se lahko pojavi problem. Recimo da imamo transformacijo, ki spremeni ukaz tako, da uporabi na mesto tega ukaza nek funkcionalno ekvivalentni ukaz z drugo operacijsko kodo (Npr iz \texttt{MUL} v \texttt{SR}). Potem pa še dodamo dodatno transformacijo, ki gre v obratno smer od prejšnje tranformacija. Če imamo taki transformaciji, se potem program zacikla saj, ko išečmo v širimo, v tabelo vstavimo kodo, ki se potem nazaj preslika v prenšnjo kodo. Ta problem se rešimo tako, da imamo še eno tabelo, kjer hranimmo vse transformacije kode.  
+
 \section{Primeri optimizacije}
-\label{priG3}
-Tukaj je nekaj delov programa, ki jih je optimizator optimiziral in njihov pripadajoči optimiziran program. Testiranje deluje v dveh delih. Prvi del je optimiziranje kratkih programov (enakih kot v \ref{priG}), drugi del pa vsebuje poskuse na večjih programih. Taka delitev nam bo dala vpogled, kako dobro se je GNU Compiler Colection odrezal v primerjavi z GNU-Superoptimizer, pa čeprav pri GNU-Superoptimizer-ju nimamo rezultatov za večje programe.
-\subsection{Optimizacija krajših programov}
-\label{rez}
-Ko je že omenjeno v poglavju \ref{priG3}, v tem poglavju so rezultati optimizacij krajših programov. Vsi primeri kod so enaki kot v točki \ref{priG}. Prvi primer optimizacije je funkcija, ki izračuna absolutno vrednost nekega števila. 
+\label{priG}
+Tukaj je nekaj delov programa, ki jih je optimizator optimiziral in njihov pripadajoči optimiziran program. Vsi deli so majhni, saj optimizator porabi preprosto preveč časa z večje dele programa. Pri tem boste opazili, da je za primer podanih več funkcij ki pa imajo enako funkcijonalnost. Za prvi primer si lahko vzamemo del kode, ki izračuna absolutno vrednost podanega števila.
+
 \medskip
 
 \noindent
@@ -1323,22 +1451,21 @@ Ko je že omenjeno v poglavju \ref{priG3}, v tem poglavju so rezultati optimizac
 return (v0 < 0 ? -v0 : v0);
 \end{Verbatim}
 
-Optimizator je poskušal najti optimalno kodo. To je naslednji rezultat. 
+Za tako kodo je progam našel 6 možnih rešitev, dolžine 4.
+
 \medskip
 
 \noindent
-{\it Predlagana rešitev:}
+{\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z5abss2l:
-0x0000000000400770 <+0>: 	mov    %rdi,%rdx
-0x0000000000400773 <+3>: 	mov    %rdi,%rax
-0x0000000000400776 <+6>: 	sar    $0x3f,%rdx
-0x000000000040077a <+10>:	xor    %rdx,%rax
-0x000000000040077d <+13>:	sub    %rdx,%rax
-0x0000000000400780 <+16>:	retq 
+movl    %eax,%edx    
+sarl    $31,%edx
+addl    %edx,%eax
+xorl    %eax,%edx
 \end{Verbatim}
 
 Za naslednji test je optimizator iskal rešitev za enako funkcijonalnost, kot v prejšnjem testu, vendar koda je drugače napisana. Pri tej kodi manjka \texttt{else} stavek.
+
 \medskip
 
 \noindent
@@ -1348,23 +1475,22 @@ if(x<0){x=-x;}
 return x;
 \end{Verbatim}
 
-Za ta test je optimizator dobil enak rezultat kot pri prejšnjem testu.
+Enako kot za prejšnji primer, je optimizator našel 6 možnih rešitev, dolžine 4. Vse rešitve so enake kot v prejšnjem testu.
 
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z4abssl:
-0x0000000000400720 <+0>: 	mov    %rdi,%rdx
-0x0000000000400723 <+3>: 	mov    %rdi,%rax
-0x0000000000400726 <+6>: 	sar    $0x3f,%rdx
-0x000000000040072a <+10>:	xor    %rdx,%rax
-0x000000000040072d <+13>:	sub    %rdx,%rax
-0x0000000000400730 <+16>:	retq   
+movl    %eax,%edx
+sarl    $31,%edx
+addl    %edx,%eax
+xorl    %eax,%edx
 \end{Verbatim}
 
 Za naslednji test je bila podana funkcija, ki pove če je število manjše, večje ali enako številu 0. Pri tem je bila uporabljena naslednja koda.
+
+
 \medskip
 
 \noindent
@@ -1373,25 +1499,22 @@ Za naslednji test je bila podana funkcija, ki pove če je število manjše, več
 return (v0 > 0 ? 1 : (v0 < 0 ? -1 : 0));
 \end{Verbatim}
 
-Za ta test lahko opazimo, da optimizator ne obide nekaterih pogojnih skokov, ki bi jih sicer lahko obšli.
+Za takšen primer je optimizator poiskal 26 optimalnih kombinacij, dolžine 4.
+
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z4sgn2l:
-0x0000000000400790 <+0>: 	cmp    $0x0,%rdi
-0x0000000000400794 <+4>: 	mov    $0x1,%eax
-0x0000000000400799 <+9>: 	jle    0x4007a0 <_Z4sgn2l+16>
-0x000000000040079b <+11>:	repz retq 
-0x000000000040079d <+13>:	nopl   (%rax)
-0x00000000004007a0 <+16>:	setne  %al
-0x00000000004007a3 <+19>:	movzbl %al,%eax
-0x00000000004007a6 <+22>:	neg    %rax
-0x00000000004007a9 <+25>:	retq 
+addl    %eax,%eax
+sbbl    %edx,%edx
+subl    %eax,%edx
+adcl    %eax,%edx
 \end{Verbatim}
 
 Za naslednji test je bila uporabljena funkcija z enako funkcijonalnostjo kot pri prejšnjem testu. Koda tokrat uporablja \texttt{else if} stavek in za vsak izpolnjen pogoj, takoj vrne rešitev.
+
+
 \medskip
 
 \noindent
@@ -1401,25 +1524,23 @@ if(x<0){return 1;}
 else if(x>0){return -1;}
 else{return 0;}
 \end{Verbatim}
-Ta poskus ni prinesel nobenih sprememb.
+
+Pri tem primeru se najdejo razlike. Optimizator je našel optimalno rešitev šele pri dolžini 5. Pri tem je našel 245 možnih rešitev.
+
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z3sgnl:
-0x0000000000400740 <+0>: 	cmp    $0x0,%rdi
-0x0000000000400744 <+4>: 	mov    $0x1,%eax
-0x0000000000400749 <+9>: 	jle    0x400750 <_Z3sgnl+16>
-0x000000000040074b <+11>:	repz retq 
-0x000000000040074d <+13>:	nopl   (%rax)
-0x0000000000400750 <+16>:	setne  %al
-0x0000000000400753 <+19>:	movzbl %al,%eax
-0x0000000000400756 <+22>:	neg    %rax
-0x0000000000400759 <+25>:	retq  
+addl    %eax,%eax
+movl    %eax,%edx
+adcl    $-1,%edx
+subl    %eax,%edx
+sbbl    $-1,%edx
 \end{Verbatim}
 
-Neslednji podan primer nastavi 0, če je število večje ali enako 0, drugače 1.
+Naslednji podan primer nastavi 0, če je število večje ali enako 0, drugače 1.
+
 \medskip
 
 \noindent
@@ -1427,17 +1548,17 @@ Neslednji podan primer nastavi 0, če je število večje ali enako 0, drugače 1
 \begin{Verbatim}[baselinestretch=1]
 return v0 <= 0;
 \end{Verbatim}
-Optimizator najde optimalno kodo dolžine 3 inštrukcije, brez upoštevanja zadnjega \texttt{retq} ukaza, ki je ukaz za vrnitev na zadnji izveden ukaz na prejšnji funkciji.
+
+Pri tem primeru je optimizator našel 4 optimalne rešitve, dolžine 3.
+
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z4lte2l:
-0x00000000004007b0 <+0>:	xor    %eax,%eax
-0x00000000004007b2 <+2>:	test   %rdi,%rdi
-0x00000000004007b5 <+5>:	setle  %al
-0x00000000004007b8 <+8>:	retq 
+cmpl    $1,%eax
+sbbl    $0,%eax
+shrl    $31,%eax
 \end{Verbatim}
 
 Kot pri ostalih poskusih, je tudi za ta test narejena še ena poskusna koda, ki pa tokrat vrača vrednosti, takoj ko je eden izmed pogojev izpolnjen.
@@ -1450,329 +1571,51 @@ Kot pri ostalih poskusih, je tudi za ta test narejena še ena poskusna koda, ki 
 if(x<=0){return 1;}
 else{return 0;}
 \end{Verbatim}
-Rezultat ne kaže na odvisnost, kako zapišemo kodo, zato je ostala enaka.
+
+Pri tem primeru je optimizator našel enake rešitve kot v prejšnjem primeru.
+
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z3ltel:
-0x0000000000400760 <+0>:	xor    %eax,%eax
-0x0000000000400762 <+2>:	test   %rdi,%rdi
-0x0000000000400765 <+5>:	setle  %al
-0x0000000000400768 <+8>:	retq
+cmpl    $1,%eax
+sbbl    $0,%eax
+shrl    $31,%eax
 \end{Verbatim}
-\subsection{Optimizacija daljših programov}
 
-V tem poglavju so rezultati optimizacij daljših in bolj kompleksnih programov. Ti programi so bili optimizirani večkrat z različnimi konfiguracijami. Razlog za takšen način testiranja je, da ugotovimo koliko časa se splača optimizirati nek program. GNU optimizator ima 3 nivoje optimizacije in direkten prevod programa. Za vsak nivo optimizacije optimizator ima vključene določene optimizacije in način optimizacije. Optimizacijo vključimo z zastavico \texttt{-O}. Če hočem določiti kateri nivo, moramo dodati še število od 1 do vključno 3. Višji kot je nivo, bolj bo optimiziran program in več časa bo porabljen za optimizacijo. Ker pa je prevajalnik namenjen za standardne arhitekture procesorja in v programih obstaja pogojni skok, najdemo primerke programov kjer trditev glede optimizacije ne drži vedno.
-\medskip
-
-\noindent
-{\it Program preveden z optimizacijo \texttt{-O1}:}
-\begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z3sgnl:
-0x00000000004005b7 <+0>: 	mov    %rdi,%rax
-0x00000000004005ba <+3>: 	sar    $0x3f,%rax
-0x00000000004005be <+7>: 	test   %rdi,%rdi
-0x00000000004005c1 <+10>:	mov    $0x1,%edx
-0x00000000004005c6 <+15>:	cmovg  %rdx,%rax
-0x00000000004005ca <+19>:	retq
-\end{Verbatim}
+Za zadnji primer je optimizator optimiziral zelo enostavno kodo. Koda vrne število, ki je za 4 večje od danega števila.
 
 \medskip
 
 \noindent
-{\it Program preveden z optimizacijo \texttt{-O2} ali \texttt{-O3}:}
+{\it Primer kode:}
 \begin{Verbatim}[baselinestretch=1]
-(gdb) Dump of assembler code for function _Z3sgnl:
-0x0000000000400740 <+0>: 	cmp    $0x0,%rdi
-0x0000000000400744 <+4>: 	mov    $0x1,%eax
-0x0000000000400749 <+9>: 	jle    0x400750 <_Z3sgnl+16>
-0x000000000040074b <+11>:	repz retq 
-0x000000000040074d <+13>:	nopl   (%rax)
-0x0000000000400750 <+16>:	setne  %al
-0x0000000000400753 <+19>:	movzbl %al,%eax
-0x0000000000400756 <+22>:	neg    %rax
-0x0000000000400759 <+25>:	retq
+return x+4;
 \end{Verbatim}
-	%
-	\noindent
-	{\small (Optimizacija se vidi v tem, da v določenem pogoju program izvede manj ukazov kot v prejšnjem primeru optimizacije. Druga optimizacija je boljša, če imamo vrednosti večje od 0.)}
-	
-V tem poglavju bodo raziskani vsi nivoji optimizacije. Poglavje bo vsebovalo podatke o času izvajanja optimiziranega programa, izvajanje prevajalnika in velikost binarne kode prevedenega programa. Za raskivanje so bile uporabljene tri meritve časa izvajanja. Prva meritev (\texttt{real}) je dejanski čas izvajanje programa oz. čas kjer uporabnik čaka na konec programa. Druga meritev (\texttt{user})je čas, ki se porabi za izvajanje ukazov v uporabniškem načinu. V ta čas je vštet le količino časa, kjer program zaseda centralno procesno enoto. Tretja meritev (\texttt{sys}) je čas izvajanje v sistemskem načinu oz čas, ki ga program porabi med izvajanjem sistemskih klicev. Ti klici so posebne funkcije, ki se nahajajo v operacijskem sitemu in jih ne moremo optimizirat. Tako kot v prejšnji meritvi, je to meritev vštet le čas kjer je centralno procesno enota zasedena. Pri drugi in tretji meritvi moramo še upoštevati, da je dobljeni čas seštevek časov zasedenih jedrov procesorja.Tako je lahko njuna vsota časa večja od dejanskega časa izvajanja. Za prvi primer je bil podan algoritem iskanja najkrajše poti v labirintu. Labirint je predstavljen z dvodimenzionalno tabelo in vsaka celica označuje ali je na tem mestu zid. Program najprej poišče začetek poti, potem poišče pot do končne točke, in na koncu izpiše labirint z začetno in končno točko in najdeno najkrajšo pot. Algoritem iskanja deluje podobno kot algoritem izlivanje vode v labirintu.
+
+Če pogledamo to kodo, bi ugotovili, da bi lahko tako kodo zapisali le z enim ukazom, vendar, če tako kodo damo optimizatorju, ugotovimo, da optimizator ne najde take rešitve. Najde pa rešitve, ki so dolžine 4.
+
 \medskip
 
 \noindent
-{\it Poskuani program:}
+{\it Primer rešitve optimizatorja:}
 \begin{Verbatim}[baselinestretch=1]
-#include <iostream>
-#include <fstream>
-#include <new>
-#include <inttypes.h>
-
-void find(int64_t** maze,int64_t x,int64_t y){
-	int64_t last=0;
-	int64_t targetx = 0;
-	int64_t targety = 0;
-
-	for(int64_t i=0;i < x;i++){
-		for(int64_t j=0;j < y;j++){
-			if(maze[i][j] == -2){
-				targetx = i;
-				targety = j;
-			}
-		}
-	}
-	while(maze[targetx][targety]==-2){
-		for(int64_t i=0;i < x;i++){
-			for(int64_t j=0;j < y;j++){
-				if(maze[i][j] == last){
-					if(maze[i][j+1] < -1){
-						maze[i][j+1] = last+1;
-					}
-					if(maze[i+1][j] < -1){
-						maze[i+1][j] = last+1;
-					}
-					if(maze[i-1][j] < -1){
-						maze[i-1][j] = last+1;
-					}
-					if(maze[i][j-1] < -1){
-						maze[i][j-1] = last+1;
-					}
-				}
-			}
-		}
-		last++;
-	}
-	last = maze[targetx][targety];
-	maze[targetx][targety]=-2;
-	while(last > 1){
-		if(maze[targetx+1][targety] == last-1){
-			maze[targetx+1][targety] = -4;
-			targetx++;
-		}
-		else if(maze[targetx][targety+1] == last-1){
-			maze[targetx][targety+1] = -4;
-			targety++;
-		}
-		else if(maze[targetx][targety-1] == last-1){
-			maze[targetx][targety-1] = -4;
-			targety--;
-		}
-		else if(maze[targetx-1][targety] == last-1){
-			maze[targetx-1][targety] = -4;
-			targetx--;
-		}
-		last--;
-	}
-	for(int64_t i=0;i < x;i++){
-		for(int64_t j=0;j < y;j++){
-			if(maze[i][j] > 0){
-				maze[i][j] = -3;
-			}
-		}
-	}
-}
-
-int main(int argc, char * argv[]){
-	std::fstream myfile("maze", std::ios_base::in);
-	int64_t x,y,a,b;
-	x=0;
-	y=0;
-	char c;
-	myfile >> a >> b;
-	int64_t** foo = new int64_t*[a];
-	for(int i=0;i<a;i++){
-		foo[i] = new int64_t[b];
-	}
-	while (myfile >> c){
-		if(c != '\n'){
-			if(c == '*'){
-				foo[x][y] = -1;
-			}
-			else if(c == 'S'){
-				foo[x][y] = 0;
-			}
-			else if(c == 'F'){
-				foo[x][y] = -2;
-			}
-			else{
-				foo[x][y] = -3;
-			}
-			x++;
-			if(x == a){
-				y++;
-				x=0;
-			}
-		}
-	}
-	for(int64_t i =0;i<100000;i++){
-		find(foo,a,b);
-	}
-	for(int64_t i=0;i<b;i++){
-		for(int64_t j=0;j<a;j++){
-			if(foo[j][i] == 0){
-				std::cout << 'S';
-			}
-			else if(foo[j][i] == -1){
-				std::cout << '*';
-			}
-			else if(foo[j][i] == -2){
-				std::cout << 'F';
-			}
-			else if(foo[j][i] == -4){
-				std::cout << '+';
-			}
-			else{
-				std::cout << ' ';
-			}
-		}
-		std::cout << '\n';
-	}
-	return 0;
-}
+addl    $1,%eax
+addl    $1,%eax
+addl    $1,%eax
+incl    %eax
 \end{Verbatim}
 
-Najprej poglejmo meritve časa prevajanje programa za vsak nivo optimizacije. Če pogledamo tabelo \ref{tbl:1}, lahko opazimo, da se časi počasi večajo z stopnjo optimizacije, vendar ni bistvene razlike. Torej lahko za tak kratek in preprost program izberemo najvišji nivo in s tem ne bi opazili časovne razlike. Še posebej lahko izpostavimo, da razlika med prvo, drugo in tretjo stopnjo skoraj ne obstaja. Čas zasedenega procesorja se je za prvo nivo povečal 30\%, za drugi nivo 35\% in za tretji nivo 37,5\%. 
+\medskip
 
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			porabljen čas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			{\tt real} & 0.204 s & 0.232 s & 0.230 s & 0.246 s \\
-			{\tt user} & 0.160 s & 0.208 s & 0.216 s & 0.220 s \\
-			{\tt sys}  & 0.016 s & 0.004 s & 0.004 s & 0.008 s
-		\end{tabular}
-	\end{center}
-	\caption{Časi prevajanja za različna stopnje optimizacije}
-	\label{tbl:1}
-\end{table}
-
-Čeprav je razlika med prevajanjem ni občutna je pa razlika časa izvajanje programov precej občutna. Prvo kaj lahko ugotovimo je, da že prva stopnja precej izboljša delovanje programa. Kar še lahko ugotovimo, da med drugo in tretjo stopnjo razlika skoraj ne obstaja. Prva optimizacija zmanjša čas za 60\%, druga in tretja pa za 77\%. 
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			porabljen čas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			{\tt real} & 8.544 s & 3.420 s & 1.986 s & 2.028 s \\
-			{\tt user} & 8.248 s & 3.268 s & 1.848 s & 1.880 s \\
-			{\tt sys}  & 0.000 s & 0.000 s & 0.000 s & 0.000 s
-		\end{tabular}
-	\end{center}
-	\caption{Časi izvajanja iskanja poti 100000 krat}
-	\label{tbl:2}
-\end{table}
-
-Še zadnji stvar kar lahko pogledamo je velikost binarne predstavitve za funkcijo. Čeprav je program za vsak višji nivo bolj optimiziran, je program lahko daljši od nižjega nivoja. Če pogledamo tabelo \ref{tbl:3} lahko opazimo, da je velikost kode najmanjša v prvem nivoju optimizacije. Če še pogledamo tabelo \ref{tbl:4}, lahko opazimo, da ima najmanj ukazov za izvajanje. Kljub temu, pa še vedno potrebuje več časa za izvajanje, kot program preveden v drugem in tretjem nivoju optimizacije. Razlog se skriva v hitrosti izvajanje ukazov. Kot je je že omenjeno v poglavju 2, nekateri ukazi potrebujejo več časa za izvajanje ukazov (Npr. množenje). Kar se po navadi zgodi je, da program zamenja počasen ukaz, za hitrejšega, ker pa je lahko kakšen ukaz zelo počasen, optimizator ga zamenja s kombinacijo ukazov, ki je hitrejša. Posledica tega je večje število ukazov. To pa še ne pojasni večjo velikost kode, kljub manjšemu številu ukazov. Razlog se skriva v različni velikosti ukazov, ki jih naprava izvaja. Ena od razlag je, da programi optimizirani z drugo in tretjo stopnjo optimizatorja uporabljajo bolj kompleksne ukaze, ki so hitri in manipulirajo z večjo količino podatkov, vendar za to potrebujejo večji prostor, kjer lahko ta podatek shranijo (lahko so veliki 15 baytov).
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			funkcija & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			main & 1201 & 736 & 751 & 751 \\
-			find & 1328 & 497 & 617 & 631
-		\end{tabular}
-	\end{center}
-	\caption{Velikost binarne kode v bitih}
-	\label{tbl:3}
-\end{table}
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			funkcija & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			main & 242 & 172 & 168 & 168 \\
-			find & 327 & 146 & 156 & 151
-		\end{tabular}
-	\end{center}
-	\caption{Število ukazov za vsako funkcijo}
-	\label{tbl:4}
-\end{table}
-
-Naslednji poskusni program izvede Huffmanovo kodiranje besedila \cite{huff,code1}. Program najprej prebere besedilo in ga kodira. Kot rezultat izpiše kodne zamenjave za vsak simbol, ki ga najde v datoteki in kodirano besedilo z ničlami in enicami. Kot pri prejšnjem poskusu je bil najprej izmerjen čas prevajanja in optimiziranja programa na različnih nivojih optimizacij. V tem primeru lahko opazimo, da je prevajalnik potreboval več časa za optimizacijo, kot za prevajanje. Čas obdelave izvorne kode se je za prvi nivo optimizacije povečal za 18\%, za drugi nivo 74\% in za tretji nivo 105\%.
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			porabljen čas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			{\tt real} & 0.341 s & 0.393 s & 0.575 s & 0.694 s \\
-			{\tt user} & 0.296 s & 0.352 s & 0.516 s & 0.608 s \\
-			{\tt sys}  & 0.024 s & 0.032 s & 0.028 s & 0.032 s
-		\end{tabular}
-	\end{center}
-	\caption{Časi prevajanja za različna stopnje optimizacije}
-	\label{tbl:5}
-\end{table}
-
-Po prevajanju je bil program zagnan. Najprej je bil zagnan postopek kodiranja besedila. Če pogledamo v tabelo \ref{tbl:6} lahko opazimo, da smo s prvo stopnjo optimizacije precej pridobili, nadaljno optimiziranje, pa ni prineslo nobenih izboljšav. Optimiziranje za prvi nivo je prineslo izboljšavo za 75\%. Več lahko razberemo časovnih meritev dekodiranja besedila. Če pogledamo tabelo \ref{tbl:7}, vidimo podobne rezultate kot v tabeli \ref{tbl:6}. Pri uporabi prvega nivoja optimizacije spet pridobimo velik delež hitrosti, nadaljno optimiziranje pa ne prinaša veliko sprememb. Čas dekodiranja se je pri optimizaciji prvega nivoja zmanjšal za 71\%, pri optimizaciji drugega nivoja za 73\% in pri optimizaciji tretjega nivoja 75\%.
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			porabljen čas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			{\tt real} & 1.149 s & 0.397 s & 0.402 s & 0.344 s \\
-			{\tt user} & 0.980 s & 0.244 s & 0.252 s & 0.256 s \\
-			{\tt sys}  & 0.012 s & 0.024 s & 0.012 s & 0.012 s
-		\end{tabular}
-	\end{center}
-	\caption{Čas kodiranja besedilne datoteke}
-	\label{tbl:6}
-\end{table}
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			porabljen čas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			{\tt real} & 17.427 s & 5.053 s & 4.855 s & 4.553 s \\
-			{\tt user} & 16.988 s & 4.956 s & 4.644 s & 4.300 s \\
-			{\tt sys}  & 0.024 s & 0.008 s & 0.008 s & 0.012 s
-		\end{tabular}
-	\end{center}
-	\caption{Čas dekodiranja besedilne datoteke}
-	\label{tbl:7}
-\end{table}
-
-Poleg časovnih meritev, moramo še pogledat dolžino kode in število ukazov, ki jih mora naprava izvajati. Tabela \ref{tbl:9} in \ref{tbl:10} prikazujeta malo bolj zanimive podatke. Če pogledamo ti dve tabeli, lahko opazimo, da nimamo rezultate za eno izmed funkcij. Razlog za to se skriva v optimizatorju. Kar optimizator skuša narediti je vstavljanje celotne kode namesto funkcije in optimizacija vsega in tako pridobiti hitrost. To pa lahko zelo poveča velikost kode.
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			porabljen čas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			pnode\_compare & 85 & 32 & 31 & 31 \\
-			Encode & 1381 & 3048 & 3858 & 3826 \\
-			Decode & 948 & 981 & 1259 & 1275 \\
-			EncHuffman & 829 & - & - & - \\
-			GenerateCode & 487 & 2616 & 3427 & 3427 \\
-			DestroyNode & 146 & 1997 & 2338 & 2338 \\
-			show\_usage & 134 & 134 & 131 & 131 \\
-			main & 592 & 642 & 578 s & 578
-		\end{tabular}
-	\end{center}
-	\caption{Tabela z velikosti programa v bitih}
-	\label{tbl:9}
-\end{table}
-
-\begin{table}
-	\begin{center}
-		\begin{tabular}{l|cccc}
-			porabljen čas & opt. {\tt -O0} & opt. {\tt -O1} & opt. {\tt -O2} & opt. {\tt -O3} \\ \hline
-			pnode\_compare & 25 & 10 & 10 & 10 \\
-			Encode & 337 & 692 & 870 & 867 \\
-			Decode & 200 & 242 & 308 & 307 \\
-			EncHuffman & 221 & - & - & - \\
-			GenerateCode & 133 & 628 & 793 & 793 \\
-			DestroyNode & 39 & 457 & 527 & 527 \\
-			show\_usage & 28 & 27 & 27 & 27 \\
-			main & 125 & 132 & 118 & 118
-		\end{tabular}
-	\end{center}
-	\caption{Tabela s število ukazov}
-	\label{tbl:10}
-\end{table}
-
+\noindent
+{\it Primer optimalne rešitve:}
+\begin{Verbatim}[baselinestretch=1]
+addl    $4,%eax
+\end{Verbatim}
 \section{Prednosti in slabosti}
-
-Optimizator ima veliko prednosti. Poleg samodejne optimizacije glede na nivo lahko tudi sami nastavimo točno katere optimizacije naj opravi s podanimi zastavicami. Poleg tega optimizator ne potrebuje uporabnikovega nadzora med procesom. Prednost pred ostalimi optimizatorji je tudi podpora iz strani več skupin programerjev, ki skrbijo za razvoj programske opreme, potrebnih za prevod izvorne kode in s tem omogočajo podporo na več arhitekture procesorjev. Poleg tega optimizator lahko hitro in učinkovito pohitri kodo. Slaba stran optimizatorja in posledično tudi prevajalnika je, da nima grafičnega vmesnika in je s tem do uporabnika bolj neprijazen. Slabost prinaša tudi dejstvo, da optimizator (glede na primerke optimiziranega programa) ne implementira naključne elemente pri iskanju optimizirane ekvivalence izvirnega programa.
+Vsak optimizator ima svoje prednosti in slabosti in GNU-Superoptimizer ni nobena izjema. Toda pri tem optimizatorju je več slabosti kot prednosti. Največja prednost tega optimizatorja je, da vedno najde optimalen program, če upoštevamo nabor ukazov, ki jih lahko izpiše. Optimizator je tako osnovan, da lahko dodajamo nabor ukazov za druge vrste arhitekture. Program je tudi dovolj stabilen za uporabo in ga je enostavno namestiti. Prednost je tudi v tem, da najdeni programi ponavadi ne vsebujejo pogojne skoke, ki upočasnjujejo program. Tukaj pa se prednosti končajo. Največja slabost takega optimizatorja je časovna zahtevnost. Časovna zahtevnost takega programa je O(\(m*n^{2n}\)), kjer m predstavlja število ukazov in n je najmanjša dolžina, ki predstavlja ciljno funkcijo. Optimizator zna uporabljat le podan nabor operacij \cite{pdf5}, poleg tega pa ni fleksibilen, če se v originalni kodi pojavijo konstante, ki jih optimizator ne podpira pri iskanju. (Primer je omenjen v točki \ref{priG}).
 
 \chapter{Paralelizacija algoritma optimiziranja}
 
@@ -1780,13 +1623,13 @@ V prejšnjih pogljavih je od vseh časovnih meritvah najbolj pomembna \texttt{us
 
 \chapter{Zaključek}
 
-Če prav superoptimizator obstaja že 20 let, je njegov razvoj the tehnologije precej počasen \cite{pdf4}. Razlogi za počasen razvoj so počasnos programa (za razvijanje kode dolžine 12 instrukcij potrebuje nekaj ur), programi s kazalci na pomnilniško mesto vzemejo veliko časa, saj lahko kazalci kažejo na katerokoli pomnilniško mesto. Za nedvisno od naprav verzijo optimizatorja je omejen le na zelo kratke naprave, lahko funkcijonalno deluje na generiranih primerih, nevemo pa če deluje pravilno na vseh primerih in je pogosto razvit za podporo pri razvijanju prevajalnika \cite{razlog}. Po testih različnih optimizatorjev (tako iz preteklosti kot v sedanjosti) lahko pridemo do nekaterih zaključkov. Prvi zaključek je, da so superoptimizatorji skoraj neuporabni. GNU-Superoptimizator je preveč počasen in uporablja le podane ukaze. STOKE optimizator je preveč nestabile in neprijazen za navadnega uporabnika. Optimizator tudi ne deluje pravilno pri večjih programih, saj optimizira glede na testne primere, ki pa pogosto nepokrivajo vse možne rezultate, ki jih program potrebuje. Najbolje je uporabiti GNU Compiler Collection, saj polega prevajalnika vsebuje tudi optimizator. Sam optimizator je lahko precej unčikovit, če mu damo dovolj časa. Kateri nivo je najboljši za določen program je odvisen od velikosti programa. Čeprav prvi nivo optimizacije že prinese občutno hitrejši program, je bolj primeren za prostorsko kot hitrostno optimizacijo. Po rezultatih sodeč v poglvju \ref{rez} je tudi dovolj dober za krajše programe oz. za kratko delujoče programe. Če pa imamo dovolj časa in imamo zelo dolg program, potem se splača uporabiti tretji nivo optimizacije.
+Čeprav superoptimizator obstaja že 20 let, je njegov razvoj the tehnologije precej počasen \cite{pdf4}. Razlogi za počasen razvoj so počasnos programa (za razvijanje kode dolžine 12 instrukcij potrebuje nekaj ur), programi s kazalci na pomnilniško mesto vzemejo veliko časa, saj lahko kazalci kažejo na katerokoli pomnilniško mesto. Za nedvisno od naprav verzijo optimizatorja je omejen le na zelo kratke naprave, lahko funkcijonalno deluje na generiranih primerih, nevemo pa če deluje pravilno na vseh primerih in je pogosto razvit za podporo pri razvijanju prevajalnika \cite{razlog}. Po testih različnih optimizatorjev (tako iz preteklosti kot v sedanjosti) lahko pridemo do nekaterih zaključkov. Prvi zaključek je, da so superoptimizatorji skoraj neuporabni. GNU-Superoptimizator je preveč počasen in uporablja le podane ukaze. STOKE optimizator je preveč nestabile in neprijazen za navadnega uporabnika. Optimizator tudi ne deluje pravilno pri večjih programih, saj optimizira glede na testne primere, ki pa pogosto nepokrivajo vse možne rezultate, ki jih program potrebuje. Najbolje je uporabiti GNU Compiler Collection, saj polega prevajalnika vsebuje tudi optimizator. Sam optimizator je lahko precej unčikovit, če mu damo dovolj časa. Kateri nivo je najboljši za določen program je odvisen od velikosti programa. Čeprav prvi nivo optimizacije že prinese občutno hitrejši program, je bolj primeren za prostorsko kot hitrostno optimizacijo. Po rezultatih sodeč v poglvju \ref{rez} je tudi dovolj dober za krajše programe oz. za kratko delujoče programe. Če pa imamo dovolj časa in imamo zelo dolg program, potem se splača uporabiti tretji nivo optimizacije. \cite{pdf6}
 \ \\
 \newpage
 
 \clearpage  
 \addcontentsline{toc}{chapter}{Literatura}
-\bibliographystyle{plain}
+\bibliographystyle{myieeetr}
 \bibliography{literatura}
 
 

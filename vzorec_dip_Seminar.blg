@@ -1,15 +1,5 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: vzorec_dip_Seminar.aux
-The style file: plain.bst
+The style file: myieeetr.bst
 Database file #1: literatura.bib
-Warning--to sort, need author or key in sup1
-Warning--to sort, need author or key in sup2
-Warning--to sort, need author or key in gcc2
-Warning--to sort, need author or key in box
-Warning--to sort, need author or key in asem
-Warning--to sort, need author or key in cygwin
-Warning--to sort, need author or key in gcc
-Warning--to sort, need author or key in huff
-Warning--to sort, need author or key in code1
-Warning--to sort, need author or key in razlog
-Warning--empty note in pdf5
-(There were 11 warnings)
+Warning--I didn't find a database entry for "pd2"
+(There was 1 warning)

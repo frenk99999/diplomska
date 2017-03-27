@@ -1,0 +1,384 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% datoteka diploma-vzorec.tex
+%
+% vzorčna datoteka za pisanje diplomskega dela v formatu LaTeX
+% na UL Fakulteti za računalništvo in informatiko
+%
+% vkup spravil Gašper Fijavž, december 2010
+% 
+%
+%
+% verzija 12. februar 2014 (besedilo teme, seznam kratic, popravki Gašper Fijavž)
+% verzija 10. marec 2014 (redakcijski popravki Zoran Bosnić)
+% verzija 11. marec 2014 (redakcijski popravki Gašper Fijavž)
+% verzija 15. april 2014 (pdf/a 1b compliance, not really - just claiming, Damjan Cvetan, Gašper Fijavž)
+% verzija 23. april 2014 (privzeto cc licenca)
+% verzija 16. september 2014 (odmiki strain od roba)
+% verzija 28. oktober 2014 (odstranil vpisno številko)
+% verija 5. februar 2015 (Literatura v kazalu, online literatura)
+% verzija 25. september 2015 (angl. naslov v izjavi o avtorstvu)
+% verzija 26. februar 2016 (UL izjava o avtorstvu)
+% verzija 16. april 2016 (odstranjena izjava o avtorstvu)
+% verzija 5. junij 2016 (Franc Solina dodal vrstice, ki jih je označil s svojim imenom)
+
+
+\documentclass[a4paper, 12pt]{book}
+
+\usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8
+\usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
+\usepackage[pdftex]{graphicx}  % omogoča vlaganje slik različnih formatov
+\usepackage{fancyhdr}          % poskrbi, na primer, za glave strani
+\usepackage{amssymb}           % dodatni simboli
+\usepackage{amsmath}           % eqref, npr.
+%\usepackage{hyperxmp}
+\usepackage[hyphens]{url}  % dodal Solina
+\usepackage{comment}       % dodal Solina
+\usepackage{fancyvrb}
+
+\usepackage[pdftex, colorlinks=true,
+						citecolor=black, filecolor=black, 
+						linkcolor=black, urlcolor=black,
+						pagebackref=false, 
+						pdfproducer={LaTeX}, pdfcreator={LaTeX}, hidelinks]{hyperref}
+
+\usepackage{color}       % dodal Solina
+\usepackage{soul}       % dodal Solina
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	DIPLOMA INFO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ttitle}{Optimizacija strojne kode brez časovnih omejitev}
+\newcommand{\ttitleEn}{Optimization of the machine code without time constraint}
+\newcommand{\tsubject}{\ttitle}
+\newcommand{\tsubjectEn}{\ttitleEn}
+\newcommand{\tauthor}{Franko Jančič}
+\newcommand{\tkeywords}{računalnik, superoptimizator, strojna koda,prevajalnik,optimizacija}
+\newcommand{\tkeywordsEn}{computer,superoptimizator,machine code,asembler,optimization}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	HYPERREF SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{pdftitle={\ttitle}}
+\hypersetup{pdfsubject=\ttitleEn}
+\hypersetup{pdfauthor={\tauthor, matjaz.kralj@fri.uni-lj.si}}
+\hypersetup{pdfkeywords=\tkeywordsEn}
+
+
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% postavitev strani
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
+\addtolength{\marginparwidth}{-20pt} % robovi za tisk
+\addtolength{\oddsidemargin}{40pt}
+\addtolength{\evensidemargin}{-40pt}
+
+\renewcommand{\baselinestretch}{1.3} % ustrezen razmik med vrsticami
+\setlength{\headheight}{15pt}        % potreben prostor na vrhu
+\renewcommand{\chaptermark}[1]%
+{\markboth{\MakeUppercase{\thechapter.\ #1}}{}} \renewcommand{\sectionmark}[1]%
+{\markright{\MakeUppercase{\thesection.\ #1}}} \renewcommand{\headrulewidth}{0.5pt} \renewcommand{\footrulewidth}{0pt}
+\fancyhf{}
+\fancyhead[LE,RO]{\sl \thepage} 
+%\fancyhead[LO]{\sl \rightmark} \fancyhead[RE]{\sl \leftmark}
+\fancyhead[RE]{\sc \tauthor}              % dodal Solina
+\fancyhead[LO]{\sc Diplomska naloga}     % dodal Solina
+
+
+\newcommand{\BibTeX}{{\sc Bib}\TeX}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% naslovi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
+
+\newcommand{\autfont}{\Large}
+\newcommand{\titfont}{\LARGE\bf}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\setcounter{tocdepth}{1}	      % globina kazala
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% konstrukti
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\newtheorem{izrek}{Izrek}[chapter]
+\newtheorem{trditev}{Trditev}[izrek]
+\newenvironment{dokaz}{\emph{Dokaz.}\ }{\hspace{\fill}{$\Box$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PDF-A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% define medatata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\def\Title{\ttitle}
+\def\Author{\tauthor, matjaz.kralj@fri.uni-lj.si}
+\def\Subject{\ttitleEn}
+\def\Keywords{\tkeywordsEn}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% \convertDate converts D:20080419103507+02'00' to 2008-04-19T10:35:07+02:00
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\def\convertDate{%
+    \getYear
+}
+
+{\catcode`\D=12
+ \gdef\getYear D:#1#2#3#4{\edef\xYear{#1#2#3#4}\getMonth}
+}
+\def\getMonth#1#2{\edef\xMonth{#1#2}\getDay}
+\def\getDay#1#2{\edef\xDay{#1#2}\getHour}
+\def\getHour#1#2{\edef\xHour{#1#2}\getMin}
+\def\getMin#1#2{\edef\xMin{#1#2}\getSec}
+\def\getSec#1#2{\edef\xSec{#1#2}\getTZh}
+\def\getTZh +#1#2{\edef\xTZh{#1#2}\getTZm}
+\def\getTZm '#1#2'{%
+    \edef\xTZm{#1#2}%
+    \edef\convDate{\xYear-\xMonth-\xDay T\xHour:\xMin:\xSec+\xTZh:\xTZm}%
+}
+
+\expandafter\convertDate\pdfcreationdate 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% get pdftex version string
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newcount\countA
+\countA=\pdftexversion
+\advance \countA by -100
+\def\pdftexVersionStr{pdfTeX-1.\the\countA.\pdftexrevision}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% XMP data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\usepackage{xmpincl}
+\includexmp{pdfa-1b}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% pdfInfo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\pdfinfo{%
+    /Title    (\ttitle)
+    /Author   (\tauthor, damjan@cvetan.si)
+    /Subject  (\ttitleEn)
+    /Keywords (\tkeywordsEn)
+    /ModDate  (\pdfcreationdate)
+    /Trapped  /False
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\selectlanguage{slovene}
+\frontmatter
+\setcounter{page}{1} %
+\renewcommand{\thepage}{}       % preprecimo težave s številkami strani v kazalu
+\newcommand{\sn}[1]{"`#1"'}                    % dodal Solina (slovenski narekovaji)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%naslovnica
+ \thispagestyle{empty}%
+   \begin{center}
+    {\large\sc Univerza v Ljubljani\\%
+      Fakulteta za računalništvo in informatiko}%
+    \vskip 10em%
+    {\autfont \tauthor\par}%
+    {\titfont \ttitle \par}%
+    {\vskip 3em \textsc{DIPLOMSKO DELO\\[5mm]         % dodal Solina za ostale študijske programe
+%    VISOKOŠOLSKI STROKOVNI ŠTUDIJSKI PROGRAM\\ PRVE STOPNJE\\ RAČUNALNIŠTVO IN INFORMATIKA}\par}%
+    UNIVERZITETNI  ŠTUDIJSKI PROGRAM\\ PRVE STOPNJE\\ RAČUNALNIŠTVO IN INFORMATIKA}\par}%
+%    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ RAČUNALNIŠTVO IN MATEMATIKA}\par}%
+%    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ UPRAVNA INFORMATIKA}\par}%
+%    INTERDISCIPLINARNI UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM PRVE STOPNJE\\ MULTIMEDIJA}\par}%
+    \vfill\null%
+    {\large \textsc{Mentor}: doc.\ dr.  Peter Klepec\par}%
+   {\large \textsc{Somentor}:  izr.\ prof.\ dr. Martin Krpan \par}%
+    {\vskip 2em \large Ljubljana, 2016 \par}%
+\end{center}
+% prazna stran
+%\clearemptydoublepage      % dodal Solina (izjava o licencah itd. se izpiše na hrbtni strani naslovnice)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%copyright stran
+\thispagestyle{empty}
+\vspace*{8cm}
+Fakulteta za računalništvo in informatiko podpira javno dostopnost znanstvenih, strokovnih in razvojnih rezultatov. Zato priporoča objavo dela pod katero od licenc, ki omogočajo prosto razširjanje diplomskega dela in/ali možnost nadaljne proste uporabe dela. Ena izmed možnosti je izdaja diplomskega dela pod katero od Creative Commons licenc \href{http://creativecommons.si}{http://creativecommons.si}
+
+Morebitno pripadajočo programsko kodo praviloma objavite pod, denimo, licenco 
+\emph{GNU General Public License, različica 3}. Podrobnosti licence so dostopne na spletni strani \href{http://www.gnu.org/licenses/}{http://www.gnu.org/licenses/}.
+
+\begin{center}
+\mbox{}\vfill
+\emph{Besedilo je oblikovano z urejevalnikom besedil \LaTeX.}
+\end{center}
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% stran 3 med uvodnimi listi
+\thispagestyle{empty}
+\vspace*{4cm}
+
+\noindent
+Fakulteta za računalništvo in informatiko izdaja naslednjo nalogo:
+\medskip
+\begin{tabbing}
+\hspace{32mm}\= \hspace{6cm} \= \kill
+
+
+
+
+Tematika naloge:
+\end{tabbing}
+Zaradi želje po hitrem prevajanju je optimizacija strojne kode med prevajanjem vedno časovno zelo omejena. Raziščite, ali bi z odpravo časovne omejitve pri optimizaciji strojne kode lahko pridobili bistveno učinkovitejšo strojno kodo glede na različne kriterije kot sta dolžina in hitrost kode. Preglejte ustrezno strokovno literaturo, podajte pregled in poskusite implementirati najobetavnejšo metodo, po možnosti tako, ki se jo da ustrezno paralelizirati.
+\vspace{15mm}
+
+
+
+
+
+
+\vspace{2cm}
+
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% kazalo
+\pagestyle{empty}
+\def\thepage{}% preprecimo tezave s stevilkami strani v kazalu
+\tableofcontents{}
+
+
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% seznam kratic
+
+\chapter*{Seznam uporabljenih kratic}  % spremenil Solina, da predolge vrstice ne gredo preko desnega roba
+
+\begin{comment}
+\begin{tabular}{l|l|l}
+{\bf kratica} & {\bf angleško} & {\bf slovensko} \\ \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+{\bf CA} & classification accuracy & klasifikacijska točnost \\
+{\bf DBMS} & database management system & sistem za upravljanje podatkovnih baz \\
+{\bf SVM} & support vector machine & metoda podpornih vektorjev \\
+\dots & \dots & \dots \\
+\end{tabular}
+\end{comment}
+
+\noindent\begin{tabular}{p{0.1\textwidth}|p{.4\textwidth}|p{.4\textwidth}}    % po potrebi razširi prvo kolono tabele na račun drugih dveh!
+	{\bf kratica} & {\bf angleško} & {\bf slovensko} \\ \hline
+	{\bf GCC}      & GNU Compiler Collection & GNU prevajalnikova knjižnjica \\
+	{\bf GNU} & GNU's Not Unix & GNU-jev ne Unix \\
+	{\bf CPU} & Computer Processing Unit & Centralno processna enota \\
+	{\bf SA} & Simulated Annealing & Simulated Annealing \\
+	{\bf DDEC} & Data-Driven Equivalence Checking & Podatkovno vodeno preverjanje ekvivalence  \\
+	{\bf JIT} & Just-in-time & ravno pravi čas \\
+	{\bf ULP} & uncertainty in the last place & odstopanja v zadnjem mestu \\
+	{\bf GSO} & Group search optimizer  & skupinsko optimizaroe iskanja \\
+	{\bf EGCS} & Experimental GNU Compiler System  & Eksperimentalni GNU prevajalni sistem \\
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% povzetek
+\addcontentsline{toc}{chapter}{Povzetek}
+\chapter*{Povzetek}
+
+\noindent\textbf{Naslov:} \ttitle
+\bigskip
+
+\noindent\textbf{Avtor:} \tauthor
+\bigskip
+
+%\noindent\textbf{Povzetek:} 
+\noindent 
+V današnjem času nam je pisanje programov precej olajšano. Za pisanje lahko uporabimo visoko nivojske jezike (kot so Java, C, C++, Python itd) ali pa psevdo ukaze. Vendar moramo programe v večini primerov prevesti v strojno kodo, da jo lahko računalnik požene. Če pa bi si podrobno ogledali to strojno kodo, bi v nekaterih primerih opazili, da se prevedena koda ne ujema s izvorno kodo, klub temu, da je funkcijonalnost takega programa enaka kot v izvirni kodi. To je zato, ker ga prevajalnik optimizira. V nadaljevanju bomo spoznali koliko je možno program optimizirat v daljši časovni omejitvi in koliko se splača to delat.
+\bigskip
+
+\noindent\textbf{Ključne besede:} \tkeywords.
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% abstract
+\selectlanguage{english}
+\addcontentsline{toc}{chapter}{Abstract}
+\chapter*{Abstract}
+
+\noindent\textbf{Title:} \ttitleEn
+\bigskip
+
+\noindent\textbf{Author:} \tauthor
+\bigskip
+
+%\noindent\textbf{Abstract:} 
+\noindent Nowadays we can write programs much easier. For writing the code we can used High-Level languages (such as Java, C, C ++, Python, etc.) or a pseudo-codes. However in most cases we have to compile into machine code that the computer can run. If you look more closely at the machine code, in some cases we notice that the translated code does not match the source code, however, the function of programmenwriten in machine code and source code are the same. This is because the compiler optimizes the program. Below, we will know how much it is possible to optimize the program with long time constraint and how much does it pays to work.
+\bigskip
+
+\noindent\textbf{Keywords:} \tkeywordsEn.
+\selectlanguage{slovene}
+% prazna stran
+\clearemptydoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\setcounter{page}{1}
+\pagestyle{fancy}
+
+\chapter{citati}
+
+Čeprav superoptimizator obstaja že 20 let, je njegov razvoj the tehnologije precej počasen. Razlogi za počasen razvoj so počasnos programa (za razvijanje kode dolžine 12 instrukcij potrebuje nekaj ur), programi s kazalci na pomnilniško mesto vzemejo veliko časa, saj lahko kazalci kažejo na katerokoli pomnilniško mesto. Za nedvisno od naprav verzijo optimizatorja je omejen le na zelo kratke naprave, lahko funkcijonalno deluje na generiranih primerih, nevemo pa če deluje pravilno na vseh primerih in je pogosto razvit za podporo pri razvijanju prevajalnika \cite{razlog}.
+
+Še ena bolj zanimiva verzija je uporaba kombinacije superoptimizatorja in podatkovne baze. Idea je, da program le avtomatično generira pravila, ter jih zapiše v podatkovno bazo, baza pa je kaseneje uporabjena za podporo prevajalniku pri optimizaciji kode. Optimizatorju je podan testni program, iz katerega vleče kodo, za optimizacijo. Vsaka izvlečena koda se izvede na testni napravi. Na koncu izvajanja, program zabeleži vse žive registre in stanje naprave. Za to stanje izračuna hash vrednost, ter jo s temu primernim zaporedjem ukazov v tabelo vstavi. Med izvajanjem tega algoritma, optimizator izvaja podoben algoritem kot pri GSO, ter generirano kodo izvede. Izvajanje poteka na dveh fiksnih stanji naprave. Za vsako generirano kodo, program poišče v tablei, če je v njej že shranjena izračunana hash vrednonst. V primeru najdene take vrednosti, optimizator preveri ekvivalenco in jo v primeru dokazane ekvivalence zapiše v podatkovno bazo. Če ne najde enake vrednosti, potem jo zavrže. Enako kot pri originalni različici, je tudi tu pri generiranju kode uporabljena omejena količina operacijskih kod. Poleg tega je potrebno vsako zaporedje posplošiti, saj bi bila količina primerov prevelika. Postopek posploševanja je relativno enostavno. Za vsak register in konstanto priredimo novo ime. Pri tem velja pravilo, da preimenujemo spremenljivke v zaporedju, kot jih koda izvaja. Pri tem algoritmu je še ena omejitev, vsaka izvlečena kone ne sme vsebovati točko vstopa v segment kode, kjer skok izvira iz segmenta. Poleg tega generirana kode ima le en skok izven segment. Pri je še dodatno omejena na največ 4 različne registre \cite{super}.
+
+Največja slabost takega optimizatorja je časovna zahtevnost. Časovna zahtevnost takega programa je O(\(m*n^{2n}\)), kjer m predstavlja število ukazov in n je najmanjša dolžina, ki predstavlja ciljno funkcijo. Optimizator zna uporabljat le podan nabor operacij, poleg tega pa ni fleksibilen, če se v originalni kodi pojavijo konstante, ki jih optimizator ne podpira pri iskanju  \cite{pdf5}.
+
+Z3 intergrira moderno metodo, ki temelji na DPLL SAT reševalec, jederni teoretski reševalec, ki se ukvarja z enakovrednostmi in neinterpretiranimi funkcijami, satelitskimi reševalci (za aritmetiko, tabelo, etc.), in E-ujemanjem abstraktnih strojev (za kvantifikatorje) \cite{article3}.
+
+Razvinjanje se je nadaljevalo v letu 1992 z kombiniranjem GNU C prevajalnikom in GSO superoptimizatorjem. GSO je približno 3000 vrstic kode C in je od gostitelja neodvisna. Za razliko od prvih suprotimizatorjev, superoptimizer GSO išče zaporedij navodil, izračuna eno več ciljnih funkcij, ki so bili prevedeni v GSO. Željeni cilj je izbran z možnostjo ukazne vrstice z imenon mnemonika. GSO generira zaporedja kode za veliko različnih ciljnih naprav in je zasnovan tako, da so lahko dodatne ciljne naprave enostavno dodane. Trenutno GSO podpira IBM RS / 6000, Sparc, Motorola 68K in 88k, AMD 29k in Intel 80386. Prenosljivost je dosežena z opredelitvijo splošnih inštrukcij, ki vključujejo združitev vseh navodili, ki jih GSO podpira pri vseh podprtih naprav \cite{url1}.
+
+Algoritem v STOKE optimizatorju je posledično lahko reševal tudi druge probleme. Primer takega je avtomatično učenje ukazov. Ideja takega algoritma je, da je programu podan osnovni nabor ukazov, program pa bi moral iz osnovnih ukazov sestaviti zaporedje ukazov, ki je funkcijonalno enaka bolj kompleksnemu ukazu \cite{article4}
+
+Pri iskanju ekvivalence, program ima implementiran  podatkovno vodeno preverjanje ekvivalence (Data-Driven Equivalence Checking), ki uporablja točke rezanja, ki kodo z zankami razdelijo v brezzančno kodo. Vsaka točka rezanja vsebuje par lokacij. Vsaka lokacija v paru je v svojem programu. Program generira točke rezanja z izčrpnim (brute force) iskanjem, kjer gleda razlike v stanju naprave. 
+\begin{equation}
+\exists{a,b} \in \mathbb{N}, \forall \sigma  ,m_t = a*m_r + b 
+\label{eq:2}
+\end{equation}
+Za vse točke mora veljati izraz \ref{eq:2}, kjer sta $a$ in $b$ konstanti, $\sigma$ podanp stanje naprave, $m_t$ ozančuje koliko krat gre izvajanje skozi točko v izvirnem programu in $m_r$ ozančuje koliko krat gre izvajanje skozi točko v dobljenem programu. Program tudi zavrne točke, kje število lokacij v pomnilniku ni konstanten. Preostale točke izbira glede na razlike v stanju naprave, od najmanjše do največje. Izbiranje poteka, dokler ne dobimo brezzančne segmente kode. Nazadnje odstrani vse točke, kjer segmenti še vedno ostanejo brezzančni. Recimo da imamo originalen program $T$ in program skuša preveriti ekvivalenco programa $R$. Program najprej naredi kočke rezanja \texttt{a}, \texttt{b} in \texttt{c}. Te toćke označujejo segmente od \texttt{a} do \texttt{b} (rez kode v zanki), od prvega ukaza v zanki, do \texttt{b} in od \texttt{b} do \texttt{c}. S pomočjo take razdelitve lahko optimizator induktivno dokaže, da je dobljen program ekvivalenten izvirnemu \cite{article2}.
+
+Čeprav superoptimizator obstaja že 20 let, je njegov razvoj the tehnologije precej počasen. Kjub temu, da imamo demostracije delovanja super optimizatorjev in imamo vednno bolj zmogljivejše računalnike, suptimizatorji imajo malo pozornosti pri razvijanju programske opreme \cite{pdf4}.
+
+Druga ideje združuje poglavje o optimizaciji večvejitvenih poteh (Npr. \texttt{switch} stavki) in GSO. Dokument \cite{branch} opisuje kako naj bi optimizirali več vejitveno kodo z predelano verzijo superoptimizatorja. Superoptimizator naj bi vseboval predelano binarno drevo, ki prestavljalo vejitev skokov na določeno kodo. Vsaka točka v drevesu predstalja število ali operacijo in vsaka poveza bi predstavljal pot izpolnjenega ali neizponjega pogoja. Koren drevesa se vedno začne s številom in ima povezavo do primerjalnega operatorja. Primerjalni operator potem to število uporabi za primerjanje vrednosti. V drevesu je možno, da sta na poti po drevesu navzdol zaporedno povezana dva primerjalna operatorja. V tem primeru bi algoritem vzel zadnjo prebrano vrednost na poti. Po končani optimizaciji bi optimizator nadaljeval z oprimizacijo vsake veje posebej \cite{branch}.
+
+Prvi primer poskusov se najde že leta 1987. Superoptimizer vzame program napisan v strojnem jeziku kot vhodni vir. Ugotovi  najkrajši program, ki izračuna enako funkcijo kot izvorni program z izčrpnim iskanjem preko vseh možnih programov. Prostor iskanja je opredeljen z izbiro podskupinskega nabora strojnih ukazov, in funkcionalno enak vendar optimiziran nabor ukazov shranjenih v tabeli. Superoptimizator s pomočjo te tabele generira kodo, najprej dolžine 1, nato dolžine 2, in tako naprej. Vsak od teh ustvarjenih programov je testiran, in če je ugotovljeno, da se funkcija izvirnega programa ujema, superoptimizator natisne program in konča. Za skrajšanje časa za iskanje uporablja dve metodi. Prvi je hiter probabilističen test za določanje ekvivalence dveh programov. Druga je metoda obrezovanje preiskovalnega prostor, medtem pa ohranja jamstvo optimalnosti. Ker pa program ni mogel optimizirati kode daljše od 12 inštrukcij, je bila njegova uporabnost majhna \cite{pdf2}.
+
+Če ima kakšna zanka več pogojev, potem je lahko možno, da to zanko podvojimo tako, da v prvi zanki ostane en pogoj, v drugi pa drugi pogoj. S takimm načinom se lahko tudi izognemo izvajanu \texttt{if} stavkov, če pogoj ni odvisen od spremenljivk v zankah \cite{avoid}.
+
+Idea takega iskanja ekvivalence je, da vsak bit v registru predstavlja boolean spremenljivko in vsaka operacija predstavlja odvisnost med biti pri izvedbi enega ukaza. Rezultat take predstavitve je graf, kjer vozlišče predstavlja boolean spremenljivko. Problem takega alogoritma se pojavi v predstavitvi bolj kompleksnih funkcij, kot so množenje in deljenje, saj je posledica tega zelo velik graf in posledično tudi program potrebuje zelo veliko časa za dokazovanje ekvivalence \cite{pdf6}.
+
+Leta 2013 so razvili stohastičen superoptimizator. Stohastičen optimizator uporablja brez zančni superoptimizacijsko nalogo kot stohastični problem iskanja. Konkurenčne omejitve od preoblikovanja pravilnosti in izboljševanja delovanja so kodirani kot izrazi v odvisnosti stroškov, ter Markov Chain Monte Carlo vzorčevanje se uporablja za hitro raziskovanje prostora vseh možnih programov, da najde tisti program, ki je optimizacija danega ciljnega programa. Čeprav njihova metoda žrtvuje popolnosti, obseg programov, programe ki jih sposoben preučiti in kakovost programov, ki jih posledično proizvaja, daleč presegajo tiste proizvedene od obstoječih superoptimizatorjev. Že binarne datotek, prevedene z  llvm -O0 izbranim za 64-bitne x86, njihova izvedba prototipa, STOKE, je sposobna proizvajati programe, ki bodisi so enako dobre ali prekašajo kodo, ki jih generira gcc -O3, icc -O3, in v nekaterih primerih tudi strokovno lastnoročno napisano kodo \cite{article1,article5}.
+
+Še bolj se dejstvo zakomplicira, ko upoštevamo, da se med vsako operacijo število zaokrožuje. Zato je v optimizatorju implementiran algoritem, ki preverja odstopanje med izvirnim in dobljenim programom. Pri računanju odstopanja pa se pojavi problem. Najbolj razširjena načina za računanje odstopa, sta relativna in absolutna razlika. Absolutno razliko dobimo tako, da iz dobljene vrenosti odštejemo prvotno vrednost. Če pa abolutno razliko delimo z prvotno vrednostjo, dobimo relativno vrednost. Oba načina imata problem pri računanju odstopanja. Absolutna razlika se v večjimi števili povečuje, Relativna vrednost, pa se povečuje pri denomlaliziranih številih. Tak problem se še bolj povečuje z računanjem ne-sosednjih števil. Zato je za izračun odstopanja uporabljen algoritem negotovost v zadnjem mestu (uncertainty in the last place), ki izmeri razliko med realnim številom in najbližjim predstavljen številu s plavojoćčo vejico v registru. V tem primeru STOKE računa razliko med stare in nove vrednosti v registru v ciljnem programu. Prednost take funkcije je, da lahko razliko izračuna tudi, če je kot argment podan noskončno ali nedefinirano število. ULP v C-ju potrebuje dva argumenta tipa \texttt{double}. Funkcija najprej predefinira ragumente, tako da shranjeno vrednost v spremenljivki prebere kot celoštevilsko vrednost in vrne absolutno razliko med argumentoma. Pri tem še popravi porazdelitev števila s plavajočo vejico od minus neskončno do 0 tako da od celoštevilske vrednosti odšteje najmanjše predznačeno število, ki jo lahko celoštevilska vrednost zavzeme, saj prvotno bi najmanjša vrednost predstavljala negativno ničlo in 0 bi prestavljala negativno nedefinirano število. Skupno odstopanje med izvirnim in dobljenim programom izračuna tako, da vzeme maksimalno odstopanje enega podatka, saj s tem prepreči možnost preliva pri seštevanju takih števil. STOKE sprejme končen program v primeru, če ne odstopa za več kot \(n\), ki je določena s strani uporabnika \cite{float2}.
+
+Najprej preveri če se tranzicija iz \texttt{a} do \texttt{c} z enakim stanjem naprave konča z enako vrnjeno verdnostjo. Potem preveri če pri tranziciji iz \texttt{a} do \texttt{b} obvelja relacija I. Kasneje preveri trazicijo od \texttt{b} do \texttt{b}, če relacija še vedno velja. Na koncu preveri če tranzicija med \texttt{b} in \texttt{c}, ki zadovoljuje relacijo I in vrne enako končno vrednost \cite{sto}.
+
+
+
+\ \\
+\newpage
+
+\clearpage  
+\addcontentsline{toc}{chapter}{Literatura}
+\bibliographystyle{myieeetr}
+\bibliography{literatura}
+
+
+\end{document}
+
