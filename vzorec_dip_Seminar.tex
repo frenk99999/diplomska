@@ -1305,7 +1305,7 @@ Kot vsi optimizatorji ima tudi ta optimizator nekaj prednosti in slabosti. Prva 
 Poleg obstoječih programov, je bil še narejena lastnen poskus implementacije superoptimizarotja. Ta optimizator se razlikuje od prejšnjih optimizatorjev, omenjenih V poglavju \ref{ch2} in \ref{ch3}. Kot prvo, program je napisan v programskem jeziku Java. Kot drugo, program uporablja drugačen zbirni jezik. Omenjana optimizatorja sta uporabljala zbirni jezik za Intelov procesor, lastna implementacija pa uporablja MMIX zbirni jezik. Ta zbirni jezik je uporabljen, ker je bolj enostaven jezik in za ta jezik lažje implementirati kot Intelov. Programski jezik Java je bil uporabljen, ker podpira objektno programiranje in dedovanje. Poleg tega je bil še uporabjen pomožni program NetBeans.
 
 \section{Opis programa in načina delovanja}
-\label{prev4}
+\label{prev6}
 Kot je že v točki \ref{ch4} omenjeno, optimizator je napisan v programskem jeziku Java. Če želimo tak program uporabiti ga moramo najprej prevesti z Java prevajalnikom. Ker je bil poleg prevajalnika uporabljen še pomožni program, ga je lažje prevesti. Programu je podan kot vhod ime besedilne datoteke. V Datoteki so napisani ukazi v MMIX zbirnem jeziku. Program ga potem prebere in shrani zaporedje ukazov v spremenljivko razreda oz. \texttt{class} \texttt{Code}. Vsak ukaz je shranjen v spremenljivki razreda \texttt{Instruction}. Razred {Instrucktions} vesebuje spremenljivke za shranjevanje operandov v ukazov. Ti operandi so razdeljeni v tobelo vhodnih operandov in tabelo izhodnih operandov. Poleg tega je so še definirane tabela vhodnih in tabela izhodnih posebnih registrov, s katerimmi določena operacijska koda manipulira (Npr. \texttt{MULU} uporablja kot dodaten izhod posebni register \texttt{rH}). Pri branju programa optimizator naprej določi operacijsko kodo, potem določi kakšnega tipa so operandi in potem poskuša najti ujemanje v podani množici naborov ukazov v \texttt{if} stavku. Za dodajanje novega tipa ukaza je potrebno spremeniti v \texttt{if} ali \texttt{else if} pogoj, ali stavku dodati nov \texttt{else if} stavek za že obsteječo operacijsko kodo ali pa dodati nov \texttt{case}, če dodajamo ukaz z novo operacijsko kodo.
 
 \medskip
@@ -1399,7 +1399,7 @@ private static void change(TreeSet<Code> codeList){
 
 \subsection{Zagon}
 
-Kot je že omenjeno v poglavju \ref{prev4}, program je potrebno prevesti, ter ga potem pognati. Prevajalnik se zažene s pomočjo ukazne vrstice. Ukaz je enostaven in ne potrebuje nobenih zastavic. Preveden program potem poženemo z ukazno vrstico. Pri tem moramo podati kot argument imena datotek, ki jih želimo optimizirati.
+Kot je že omenjeno v poglavju \ref{prev6}, program je potrebno prevesti, ter ga potem pognati. Prevajalnik se zažene s pomočjo ukazne vrstice. Ukaz je enostaven in ne potrebuje nobenih zastavic. Preveden program potem poženemo z ukazno vrstico. Pri tem moramo podati kot argument imena datotek, ki jih želimo optimizirati.
 
 \medskip
 	
@@ -1437,11 +1437,11 @@ Ker je optimizator narejen s pomočjo NetBeans programa, lahko NetBeans uporabim
 
 \subsection{Način optimiziranja}
 
-MMIX superoptimizator optimizira glede na podan nabor vzorcev. Ti vzorci so opisani v obliki metode. Vsaka metoda je potem uporabljena v skupni metodi \texttt{change}. To omogoči, da je vsaka transformacija funkcijonalno enaka. Pri iskanju po prostoru se uporablja mešanica iskanja po širini in globini. Program najprej išče najbolj optimalno optimizacijo po širini in shrani vsako najdeno kombinacijo v tabelo. Potem iz tabele vzame najkrajšo najdeno kodo in na njej pononvo naredi vse transformaije, ter vse transformacije shrani nazaj v tabelo. Program konča ko nima več nobene kode za tranformirat. Tukaj se lahko pojavi problem. Recimo da imamo transformacijo, ki spremeni ukaz tako, da uporabi na mesto tega ukaza nek funkcionalno ekvivalentni ukaz z drugo operacijsko kodo (Npr iz \texttt{MUL} v \texttt{SR}). Potem pa še dodamo dodatno transformacijo, ki gre v obratno smer od prejšnje tranformacija. Če imamo taki transformaciji, se potem program zacikla saj, ko išečmo v širimo, v tabelo vstavimo kodo, ki se potem nazaj preslika v prenšnjo kodo. Ta problem se rešimo tako, da imamo še eno tabelo, kjer hranimmo vse transformacije kode.  
+MMIX superoptimizator optimizira glede na podan nabor vzorcev. Ti vzorci so opisani v obliki metode. Vsaka metoda je potem uporabljena v skupni metodi \texttt{change}. To omogoči, da je vsaka transformacija funkcijonalno enaka. Pri iskanju po prostoru se uporablja mešanica iskanja po širini in globini. Program najprej išče najbolj optimalno optimizacijo po širini in shrani vsako najdeno kombinacijo v tabelo. Potem iz tabele vzame najkrajšo najdeno kodo in na njej pononvo naredi vse transformaije, ter vse transformacije shrani nazaj v tabelo. Program konča ko nima več nobene kode za tranformirat. Tukaj se lahko pojavi problem. Recimo da imamo transformacijo, ki spremeni ukaz tako, da uporabi na mesto tega ukaza nek funkcionalno ekvivalentni ukaz z drugo operacijsko kodo (Npr iz \texttt{MUL} v \texttt{SR}). Potem pa še dodamo dodatno transformacijo, ki gre v obratno smer od prejšnje tranformacija. Če imamo taki transformaciji, se potem program zacikla saj, ko išečmo v širimo, v tabelo vstavimo kodo, ki se potem nazaj preslika v prenšnjo kodo. Ta problem se rešimo tako, da imamo še eno tabelo, kjer hranimmo vse transformacije kode. Vendar ta rešitev primaša novi problem. Problem je, da ko izvajamo transformacije na kodo, ki je daljša, lahko dobimo toliko rešitev, da računalniku preprosto zmajka prostorja.
 
 \section{Primeri optimizacije}
 \label{priG}
-Tukaj je nekaj delov programa, ki jih je optimizator optimiziral in njihov pripadajoči optimiziran program. Vsi deli so majhni, saj optimizator porabi preprosto preveč časa z večje dele programa. Pri tem boste opazili, da je za primer podanih več funkcij ki pa imajo enako funkcijonalnost. Za prvi primer si lahko vzamemo del kode, ki izračuna absolutno vrednost podanega števila.
+Tukaj je nekaj delov programa, ki jih je optimizator optimiziral in njihov pripadajoči optimiziran program. Vsi deli so majhni. Kot je bilo omenjeno v \ref{prev6}, optimizatorju je bil podan pogram napisan v zbirnem jeziku. Pri tem boste opazili, da je za primer podanih več funkcij ki pa imajo enako funkcijonalnost. Za prvi primer si lahko vzamemo del kode, ki izračuna absolutno vrednost podanega števila.
 
 \medskip
 
@@ -1451,17 +1451,16 @@ Tukaj je nekaj delov programa, ki jih je optimizator optimiziral in njihov pripa
 return (v0 < 0 ? -v0 : v0);
 \end{Verbatim}
 
-Za tako kodo je progam našel 6 možnih rešitev, dolžine 4.
+Za tako kodo je program zaporedje dolgo 2 ukaza.
 
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-movl    %eax,%edx    
-sarl    $31,%edx
-addl    %edx,%eax
-xorl    %eax,%edx
+  BP $0,end
+  NEGU $0,0,%0
+end
 \end{Verbatim}
 
 Za naslednji test je optimizator iskal rešitev za enako funkcijonalnost, kot v prejšnjem testu, vendar koda je drugače napisana. Pri tej kodi manjka \texttt{else} stavek.
@@ -1475,17 +1474,16 @@ if(x<0){x=-x;}
 return x;
 \end{Verbatim}
 
-Enako kot za prejšnji primer, je optimizator našel 6 možnih rešitev, dolžine 4. Vse rešitve so enake kot v prejšnjem testu.
+Enako kot za prejšnji primer, je program zaporedje dolgo 2 ukaza.
 
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-movl    %eax,%edx
-sarl    $31,%edx
-addl    %edx,%eax
-xorl    %eax,%edx
+ BP $0,end
+ NEGU $0,0,$0
+end
 \end{Verbatim}
 
 Za naslednji test je bila podana funkcija, ki pove če je število manjše, večje ali enako številu 0. Pri tem je bila uporabljena naslednja koda.
@@ -1499,17 +1497,24 @@ Za naslednji test je bila podana funkcija, ki pove če je število manjše, več
 return (v0 > 0 ? 1 : (v0 < 0 ? -1 : 0));
 \end{Verbatim}
 
-Za takšen primer je optimizator poiskal 26 optimalnih kombinacij, dolžine 4.
+Za takšen primer program ni našel boljše rešitve od dolžine 7.
 
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-addl    %eax,%eax
-sbbl    %edx,%edx
-subl    %eax,%edx
-adcl    %eax,%edx
+ BN $0,neg
+ SETL $0,1
+ JMP end
+neg 
+ BP $0,zero
+ SRU $0,$0,64
+ JMP end
+zero 
+ SETL $0,0
+end
+
 \end{Verbatim}
 
 Za naslednji test je bila uporabljena funkcija z enako funkcijonalnostjo kot pri prejšnjem testu. Koda tokrat uporablja \texttt{else if} stavek in za vsak izpolnjen pogoj, takoj vrne rešitev.
@@ -1525,18 +1530,23 @@ else if(x>0){return -1;}
 else{return 0;}
 \end{Verbatim}
 
-Pri tem primeru se najdejo razlike. Optimizator je našel optimalno rešitev šele pri dolžini 5. Pri tem je našel 245 možnih rešitev.
+Tako kot v prejšnjem primeru je program našel kodo dolžine 7.
 
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-addl    %eax,%eax
-movl    %eax,%edx
-adcl    $-1,%edx
-subl    %eax,%edx
-sbbl    $-1,%edx
+ BN $0,neg
+ SETL $0,1
+ JMP end
+neg 
+ BP $0,zero
+ SRU $0,$0,64
+ JMP end
+zero 
+ SETL $0,0
+end
 \end{Verbatim}
 
 Naslednji podan primer nastavi 0, če je število večje ali enako 0, drugače 1.
@@ -1549,16 +1559,19 @@ Naslednji podan primer nastavi 0, če je število večje ali enako 0, drugače 1
 return v0 <= 0;
 \end{Verbatim}
 
-Pri tem primeru je optimizator našel 4 optimalne rešitve, dolžine 3.
+Pri tem primeru je optimizator našel kodo dolgo 3 ukaze.
 
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-cmpl    $1,%eax
-sbbl    $0,%eax
-shrl    $31,%eax
+ BNP $0,non
+ SETL $0,0
+ JMP end
+non
+ SETL $0,1
+end
 \end{Verbatim}
 
 Kot pri ostalih poskusih, je tudi za ta test narejena še ena poskusna koda, ki pa tokrat vrača vrednosti, takoj ko je eden izmed pogojev izpolnjen.
@@ -1572,50 +1585,24 @@ if(x<=0){return 1;}
 else{return 0;}
 \end{Verbatim}
 
-Pri tem primeru je optimizator našel enake rešitve kot v prejšnjem primeru.
+Pri tem primeru je optimizator našel enako rešitev kot v prejšnjem primeru.
 
 \medskip
 
 \noindent
 {\it Ena izmed rešitev:}
 \begin{Verbatim}[baselinestretch=1]
-cmpl    $1,%eax
-sbbl    $0,%eax
-shrl    $31,%eax
+ BNP $0,non
+ SETL $0,0
+ JMP end
+non
+ SETL $0,1
+end
 \end{Verbatim}
 
-Za zadnji primer je optimizator optimiziral zelo enostavno kodo. Koda vrne število, ki je za 4 večje od danega števila.
-
-\medskip
-
-\noindent
-{\it Primer kode:}
-\begin{Verbatim}[baselinestretch=1]
-return x+4;
-\end{Verbatim}
-
-Če pogledamo to kodo, bi ugotovili, da bi lahko tako kodo zapisali le z enim ukazom, vendar, če tako kodo damo optimizatorju, ugotovimo, da optimizator ne najde take rešitve. Najde pa rešitve, ki so dolžine 4.
-
-\medskip
-
-\noindent
-{\it Primer rešitve optimizatorja:}
-\begin{Verbatim}[baselinestretch=1]
-addl    $1,%eax
-addl    $1,%eax
-addl    $1,%eax
-incl    %eax
-\end{Verbatim}
-
-\medskip
-
-\noindent
-{\it Primer optimalne rešitve:}
-\begin{Verbatim}[baselinestretch=1]
-addl    $4,%eax
-\end{Verbatim}
 \section{Prednosti in slabosti}
-Vsak optimizator ima svoje prednosti in slabosti in GNU-Superoptimizer ni nobena izjema. Toda pri tem optimizatorju je več slabosti kot prednosti. Največja prednost tega optimizatorja je, da vedno najde optimalen program, če upoštevamo nabor ukazov, ki jih lahko izpiše. Optimizator je tako osnovan, da lahko dodajamo nabor ukazov za druge vrste arhitekture. Program je tudi dovolj stabilen za uporabo in ga je enostavno namestiti. Prednost je tudi v tem, da najdeni programi ponavadi ne vsebujejo pogojne skoke, ki upočasnjujejo program. Tukaj pa se prednosti končajo. Največja slabost takega optimizatorja je časovna zahtevnost. Časovna zahtevnost takega programa je O(\(m*n^{2n}\)), kjer m predstavlja število ukazov in n je najmanjša dolžina, ki predstavlja ciljno funkcijo. Optimizator zna uporabljat le podan nabor operacij \cite{pdf5}, poleg tega pa ni fleksibilen, če se v originalni kodi pojavijo konstante, ki jih optimizator ne podpira pri iskanju. (Primer je omenjen v točki \ref{priG}).
+
+Kot vsak optimizator ima tudi ta optimizator ima prednosti in slabosti. Prednost takega optimizatorja je, da so dobljene rešitve vedno funkcijonalno ekvivalentne originalnemu programu ob predpostavki, da vsaka od transforcij zagotavlja ekvivalenco med originalnim programom in dobljeno rešitvijo. Poleg tega program hitro skrajša program. Prednosti pa se tam končajo. Prva slabost optimizatorja je, da je optimizator odvisen od vzorcev in transformacijskih metod. Če optimizator nima dovolj vzorcev, potem bo tudi optimizacija nekakovostna. To je lahko vidno pri poskusu odtranitve pogojnih skokov. Poleg tega je v tem optimizatorju potrebno ročno dodati nove vzorce, ker je ročno dodajanje počasno in mučno. Ker je pri dodajanju vzorcev potrebna človeška roka, je program manj odporen na napake.
 
 \chapter{Paralelizacija algoritma optimiziranja}
 
@@ -1623,7 +1610,7 @@ V prejšnjih pogljavih je od vseh časovnih meritvah najbolj pomembna \texttt{us
 
 \chapter{Zaključek}
 
-Čeprav superoptimizator obstaja že 20 let, je njegov razvoj the tehnologije precej počasen \cite{pdf4}. Razlogi za počasen razvoj so počasnos programa (za razvijanje kode dolžine 12 instrukcij potrebuje nekaj ur), programi s kazalci na pomnilniško mesto vzemejo veliko časa, saj lahko kazalci kažejo na katerokoli pomnilniško mesto. Za nedvisno od naprav verzijo optimizatorja je omejen le na zelo kratke naprave, lahko funkcijonalno deluje na generiranih primerih, nevemo pa če deluje pravilno na vseh primerih in je pogosto razvit za podporo pri razvijanju prevajalnika \cite{razlog}. Po testih različnih optimizatorjev (tako iz preteklosti kot v sedanjosti) lahko pridemo do nekaterih zaključkov. Prvi zaključek je, da so superoptimizatorji skoraj neuporabni. GNU-Superoptimizator je preveč počasen in uporablja le podane ukaze. STOKE optimizator je preveč nestabile in neprijazen za navadnega uporabnika. Optimizator tudi ne deluje pravilno pri večjih programih, saj optimizira glede na testne primere, ki pa pogosto nepokrivajo vse možne rezultate, ki jih program potrebuje. Najbolje je uporabiti GNU Compiler Collection, saj polega prevajalnika vsebuje tudi optimizator. Sam optimizator je lahko precej unčikovit, če mu damo dovolj časa. Kateri nivo je najboljši za določen program je odvisen od velikosti programa. Čeprav prvi nivo optimizacije že prinese občutno hitrejši program, je bolj primeren za prostorsko kot hitrostno optimizacijo. Po rezultatih sodeč v poglvju \ref{rez} je tudi dovolj dober za krajše programe oz. za kratko delujoče programe. Če pa imamo dovolj časa in imamo zelo dolg program, potem se splača uporabiti tretji nivo optimizacije. \cite{pdf6}
+Čeprav superoptimizator obstaja že 20 let, je njegov razvoj the tehnologije precej počasen \cite{pdf4}. Razlogi za počasen razvoj so počasnos programa (za razvijanje kode dolžine 12 instrukcij potrebuje nekaj ur), programi s kazalci na pomnilniško mesto vzemejo veliko časa, saj lahko kazalci kažejo na katerokoli pomnilniško mesto. Za nedvisno od naprav verzijo optimizatorja je omejen le na zelo kratke naprave, lahko funkcijonalno deluje na generiranih primerih, nevemo pa če deluje pravilno na vseh primerih in je pogosto razvit za podporo pri razvijanju prevajalnika \cite{razlog}. Po testih različnih optimizatorjev (tako iz preteklosti kot v sedanjosti) lahko pridemo do nekaterih zaključkov. Prvi zaključek je, da so superoptimizatorji skoraj neuporabni. GNU-Superoptimizator je preveč počasen in uporablja le podane ukaze. STOKE optimizator je preveč nestabile in neprijazen za navadnega uporabnika. Optimizator tudi ne deluje pravilno pri večjih programih, saj optimizira glede na testne primere, ki pa pogosto nepokrivajo vse možne rezultate, ki jih program potrebuje. Lastna implementacija kode zagotavlja ekvivalentno funkcijonalnost delovanja optimiziranega programa, vendar ob predpostavki, da vsaka transformacija med originalno in tranformirano kodo zagotavlja ekvivalenco. Poleg tega je še problem, da je pri vstaljanju vzorcev in tranformacijskih metod potrebna človeška roka, ki pa poveča možnost napak pri optimizaciji. Iz irezultatov, ki so bili pridobljeni z preizkušanjem več različnih superotimizatorjev lahko sklepamo, da imamo še izivov in dela predseboj za rešiti. Poleg tega lahko še sklepamo, da s trenutni superoptimizatoji in s trenutnimi račulnalniki, pri optimizaciji kode z odpravo časovne omejitve ne pridobimo veliko na optimizaciji. 
 \ \\
 \newpage
 

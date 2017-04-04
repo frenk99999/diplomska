@@ -35,7 +35,7 @@ H.~Massalin, ``Superoptimizer: A look at the smallest program,'' {\em SIGPLAN
 
 \bibitem{pdf6}
 J.~S{\"a}rnesj{\"o}, {\em Using Binary Decision Diagrams to Determine Program
-  Equivalence in a Superoptimizer.}
+  Equivalence in a Superoptimizer}.
 \newblock PhD thesis, KTH, School of Computer Science and Communication (CSC),
   2011.
 
@@ -55,17 +55,12 @@ T.~Crick, {\em Superoptimisation: provably optimal code generation using answer
 \newblock PhD thesis, University of Bath, 2009.
 
 \bibitem{ann}
-W.~K. Hastings, ``Monte carlo sampling methods using {Markov} chains and their
-  applications,'' {\em Biometrika}, št.~1, zv.~57, str.~97--109, 1970.
+W.~K. Hastings, ``Monte {Carlo} sampling methods using {Markov} chains and
+  their applications,'' {\em Biometrika}, št.~1, zv.~57, str.~97--109, 1970.
 
 \bibitem{article2}
 R.~Sharma, E.~Schkufza, B.~Churchill,, A.~Aiken, ``Data-driven equivalence
   checking,'' {\em SIGPLAN Not.}, št.~10, zv.~48, str.~391--406, 2013.
-
-\bibitem{sto}
-R.~Sharma, E.~Schkufza, B.~Churchill,, A.~Aiken, ``Conditionally correct
-  superoptimization,'' {\em SIGPLAN Not.}, št.~10, zv.~50, str.~147--162,
-  2015.
 
 \bibitem{article3}
 L.~De~Moura, N.~Bj{\o}rner, ``Z3: An efficient {SMT} solver,'' v zborniku {\em
